@@ -1,0 +1,139 @@
+{
+    "Regions": [
+        {
+            "teams": [
+                "Kentucky",
+                "Kansas",
+                "Notre Dame",
+                "Maryland",
+                "West Virginia",
+                "Butler",
+                "Wichita State",
+                "Cincinnati",
+                "Purdue",
+                "Indiana",
+                "Texas",
+                "Buffalo",
+                "Valparaiso",
+                "Northeastern",
+                "New Mexico State",
+                "Hampton"
+            ],
+            "winners": {
+                "firstRound": [1,8,5,4,6,3,7,2],
+                "secondRound": [1,5,3,7],
+                "thirdRound": [1,3],
+                "fourthRound": 1
+            },
+            "regionName": "Midwest"
+        },
+        {
+            "teams": [
+                "Wisconsin",
+                "Arizona",
+                "Baylor",
+                "North Carolina",
+                "Arkansas",
+                "Xavier",
+                "Virginia Commonwealth",
+                "Oregon",
+                "Oklahoma State",
+                "Ohio State",
+                "Ole Miss",
+                "Wofford",
+                "Harvard",
+                "Georgia State",
+                "Texas Southern",
+                "Coastal Carolina"
+            ],
+            "winners": {
+                "firstRound": [1,8,5,4,6,14,10,2],
+                "secondRound": [1,4,6,2],
+                "thirdRound": [1,2],
+                "fourthRound": 1
+            },
+            "regionName": "West"
+        },
+        {
+            "teams": [
+                "Villanova",
+                "Virginia",
+                "Oklahoma",
+                "Louisville",
+                "Northern Iowa",
+                "Providence",
+                "Michigan State",
+                "North Carolina State",
+                "Louisiana State",
+                "Georgia",
+                "Dayton",
+                "Wyoming",
+                "Cal Irvine",
+                "Albany",
+                "Belmont",
+                "Lafayette"
+            ],
+            "winners": {
+                "firstRound": [1,8,5,4,11,3,7,2],
+                "secondRound": [8,4,3,7],
+                "thirdRound": [4,7],
+                "fourthRound": 7
+            },
+            "regionName": "East"
+        },
+        {
+            "teams": [
+                "Duke",
+                "Gonzaga",
+                "Iowa State",
+                "Georgetown",
+                "Utah",
+                "Southern Methodist",
+                "Iowa",
+                "San Diego State",
+                "St. John's",
+                "Davidson",
+                "UCLA",
+                "Stephen F. Austin",
+                "Eastern Washington",
+                "UAB",
+                "North Dakota State",
+                "Robert Morris"
+            ],
+            "winners": {
+                "firstRound": [1,8,5,4,11,14,7,2],
+                "secondRound": [1,5,11,2],
+                "thirdRound": [1,2],
+                "fourthRound": 1
+            },
+            "regionName": "South"
+        }
+    ],
+    "FF": {
+        "teams": [
+            {
+                "name": "Kentucky",
+                "seed": 1
+            },
+            {
+                "name": "Wisconsin",
+                "seed": 1
+            },
+            {
+                "name": "Michigan State",
+                "seed": 7
+            },
+            {
+                "name": "Duke",
+                "seed": 1
+            }
+        ],
+        "winners": {
+            "finalFour": [
+                "Wisconsin",
+                "Duke"
+            ],
+            "championship": "Duke"
+        }
+    }
+}
