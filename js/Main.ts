@@ -2,10 +2,21 @@
 class Team {
     seed: number;
     teamName: string;
+    region: string;
     constructor(seed: number, teamName: string) {
         this.seed = seed;
         this.teamName = teamName;
     }
+}
+
+class Result {
+    firstRound: number;
+    secondRound: number;
+    sweetSixteen: number;
+    eliteEight: number;
+    finalFour: number;
+    championship: number;
+    champion: Team;
 }
 
 class TreeNode {
@@ -32,8 +43,91 @@ var seedOrder: number[] = [1,16,8,9,5,12,4,13,6,11,3,14,7,10,2,15];
 var bracketRoot: TreeNode = CreateBlankBracket(bracketData);
 var completedBracket: TreeNode = FillOutBracket(bracketRoot, LogXSeedDifference);
 console.log(completedBracket.team.teamName);
+currentTeam = 0;
+var completeCorrectBracket = CreateCompleteCorrectBracket(bracketData);
 //EndMain
 
+function CreateCompleteCorrectBracket(data): TreeNode {
+    var blankBracket: TreeNode = CreateBlankBracket(data);
+    var finishedBracket: TreeNode = FillOutCorrectBracket(blankBracket, data);
+
+    return finishedBracket;
+}
+
+function FillOutCorrectBracket(node: TreeNode, data): TreeNode {
+    if (!node.left.team) {
+        node.left.team = FillOutCorrectBracket(node.left, data).team;
+    }
+    if (!node.right.team) {
+        node.right.team  = FillOutCorrectBracket(node.right, data).team;
+    }
+
+    //Not good. Should find a better way soon
+    if (node.depth == 0) {//Championship
+        if (node.left.team.teamName == data.FF.winners.championship) {
+            node.team = node.left.team;
+        } else if (node.right.team.teamName == data.FF.winners.championship) {
+            node.team = node.right.team;
+        } else {
+            throw new Error("Championship team names did not match data winner: " + node.left.team.teamName + node.right.team.teamName + data.FF.winners.championship);
+        }
+    } else if (node.depth == 1) {//FinalFour
+        if (node.left.team.teamName == data.FF.winners.finalFour[0] || node.left.team.teamName == data.FF.winners.finalFour[1]) {
+            node.team = node.left.team;
+        } else if (node.right.team.teamName == data.FF.winners.finalFour[0] || node.right.team.teamName == data.FF.winners.finalFour[1]) {
+            node.team = node.right.team;
+        } else {
+            throw new Error("Final Four team names did not match data winner: " + node.left.team.teamName + node.right.team.teamName + data.FF.winners.finalFour);
+        }
+    } else if (node.depth == 2) {//EliteEight
+        for (let i = 0; i < data.Regions.length; i++) {
+            if (node.left.team.region == data.Regions[i].regionName) {
+                if (node.left.team.seed == data.Regions[i].winners.fourthRound) {
+                    node.team = node.left.team;
+                    i = 100;
+                } else if (node.right.team.seed == data.Regions[i].winners.fourthRound) {
+                    node.team = node.right.team;
+                    i = 100;
+                } else {
+                    throw new Error("Elite Eight seeds didn't match up properly" + node.left.team.seed + " " + node.right.team.seed + " " + data.Regions[i].winners.fourthRound);
+                }
+            }
+        }
+        if (!node.team) {
+            throw new Error("Elite Eight no team added");
+        }
+    } else if (node.depth >= 3) {//Sweet Sixteen - 1st round
+        let regionWinners;
+        for (let i = 0; i < data.Regions.length; i++) {
+            if (node.left.team.region == data.Regions[i].regionName) {
+                if (node.depth == 3) {
+                    regionWinners = data.Regions[i].winners.thirdRound;
+                } else if (node.depth == 4) {
+                    regionWinners = data.Regions[i].winners.secondRound;
+                } else if (node.depth == 5) {
+                    regionWinners = data.Regions[i].winners.firstRound;
+                }
+                for (let j = 0; j < regionWinners.length; j++) {
+                    if (node.left.team.seed == regionWinners[j]) {
+                        node.team = node.left.team;
+                        j = 100;
+                        i = 100;
+                    } else if ( node.right.team.seed == regionWinners[j]) {
+                        node.team = node.right.team;
+                        j = 100;
+                        i = 100;
+                    }
+                }
+                if (!node.team) {
+                    throw new Error("No team added: " + node.left.team + node.right.team + " Depth: " + node.depth);
+                }
+            }
+        }
+
+    }
+
+    return node;
+ }
 function CreateBlankBracket(data?, depth?: number) : TreeNode{
     if (!depth) {
         depth = 0;
@@ -49,6 +143,7 @@ function CreateBlankBracket(data?, depth?: number) : TreeNode{
         root.right.parent = root;
     } else {
         root.team = new Team(seedOrder[(currentTeam)%16], data.Regions[Math.floor(currentTeam/16)].teams[seedOrder[(currentTeam)%16]-1]);
+        root.team.region = data.Regions[Math.floor(currentTeam/16)].regionName;
         currentTeam++;
     }
     return root;
@@ -56,10 +151,10 @@ function CreateBlankBracket(data?, depth?: number) : TreeNode{
 
 function FillOutBracket(node: TreeNode, algorith) : TreeNode {
     if (!node.left.team) {
-        FillOutBracket(node.left, algorith).team;
+        node.left.team = FillOutBracket(node.left, algorith).team;
     }
     if (!node.right.team) {
-        FillOutBracket(node.right, algorith).team;
+        node.right.team = FillOutBracket(node.right, algorith).team;
     }
 
     let winningTeam: Team = algorith(node.left.team, node.right.team);
@@ -70,7 +165,7 @@ function FillOutBracket(node: TreeNode, algorith) : TreeNode {
         node.team = winningTeam;
         return node;
     } else {
-        throw new ReferenceError("No teams won");
+        throw new Error("No teams won");
     }
 }
 
