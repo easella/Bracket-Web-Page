@@ -17,7 +17,14 @@ class Result {
     eliteEight: number;
     finalFour: number;
     championship: number;
-    champion: Team;
+    constructor() {
+        this.firstRound = 0;
+        this.secondRound = 0;
+        this.sweetSixteen = 0;
+        this.eliteEight = 0;
+        this.finalFour = 0;
+        this.championship = 0;
+    }
 }
 
 class TreeNode {
@@ -47,7 +54,47 @@ currentTeam = 0;
 var completeCorrectBracket = CreateCompleteCorrectBracket(bracketData);
 var userBracketWithResults = AddResultsToUserBracket(completeCorrectBracket, filledOutUserBracket);
 console.log(userBracketWithResults.team.correct);
+var results: Result = GiveResults(userBracketWithResults);
+console.log(results);
 //EndMain
+
+function GiveResults(bracket: TreeNode, result?: Result): Result {
+    let output;
+    if (!result) {
+        output = new Result();
+    } else {
+        output = result;
+    }
+    if (bracket.left.left) {
+        output = GiveResults(bracket.left, output);
+    }
+    if (bracket.right.right) {
+        output = GiveResults(bracket.right, output);
+    }
+    if (bracket.team.correct) {
+        switch (bracket.depth) {
+            case 0:
+                output.championship++;
+                break;
+            case 1:
+                output.finalFour++;
+                break;
+            case 2:
+                output.eliteEight++;
+                break;
+            case 3:
+                output.sweetSixteen++;
+                break;
+            case 4:
+                output.secondRound++;
+                break;
+            case 5:
+                output.firstRound++;
+                break;
+        }
+    }
+    return output;
+}
 
 function AddResultsToUserBracket(correctBracket: TreeNode, userBracket: TreeNode): TreeNode {
     if (userBracket.left.left && userBracket.left.team.correct == null) {
@@ -104,10 +151,10 @@ function FillOutCorrectBracket(node: TreeNode, data): TreeNode {
             if (node.left.team.region == data.Regions[i].regionName) {
                 if (node.left.team.seed == data.Regions[i].winners.fourthRound) {
                     node.team = node.left.team;
-                    i = 100;
+                    i = data.Regions.length + 1;
                 } else if (node.right.team.seed == data.Regions[i].winners.fourthRound) {
                     node.team = node.right.team;
-                    i = 100;
+                    i = data.Regions.length + 1;
                 } else {
                     throw new Error("Elite Eight seeds didn't match up properly" + node.left.team.seed + " " + node.right.team.seed + " " + data.Regions[i].winners.fourthRound);
                 }
@@ -130,12 +177,12 @@ function FillOutCorrectBracket(node: TreeNode, data): TreeNode {
                 for (let j = 0; j < regionWinners.length; j++) {
                     if (node.left.team.seed == regionWinners[j]) {
                         node.team = node.left.team;
-                        j = 100;
-                        i = 100;
+                        j = regionWinners.length + 1;
+                        i = data.Regions.length + 1;
                     } else if ( node.right.team.seed == regionWinners[j]) {
                         node.team = node.right.team;
-                        j = 100;
-                        i = 100;
+                        j = regionWinners.length + 1;
+                        i = data.Regions.length + 1;
                     }
                 }
                 if (!node.team) {
