@@ -3,6 +3,7 @@ class Team {
     seed: number;
     teamName: string;
     region: string;
+    correct: boolean;
     constructor(seed: number, teamName: string) {
         this.seed = seed;
         this.teamName = teamName;
@@ -39,18 +40,37 @@ declare function require(name: string);
 var bracketData = require('../Data/2015.json');
 var currentTeam = 0;
 var seedOrder: number[] = [1,16,8,9,5,12,4,13,6,11,3,14,7,10,2,15];
-
 var bracketRoot: TreeNode = CreateBlankBracket(bracketData);
-var completedBracket: TreeNode = FillOutBracket(bracketRoot, LogXSeedDifference);
-console.log(completedBracket.team.teamName);
+var filledOutUserBracket: TreeNode = FillOutBracket(bracketRoot, LogXSeedDifference);
+console.log(filledOutUserBracket.team.teamName);
 currentTeam = 0;
 var completeCorrectBracket = CreateCompleteCorrectBracket(bracketData);
+var userBracketWithResults = AddResultsToUserBracket(completeCorrectBracket, filledOutUserBracket);
+console.log(userBracketWithResults.team.correct);
 //EndMain
+
+function AddResultsToUserBracket(correctBracket: TreeNode, userBracket: TreeNode): TreeNode {
+    if (userBracket.left.left && userBracket.left.team.correct == null) {
+        userBracket.left = AddResultsToUserBracket(correctBracket.left, userBracket.left);
+    }
+    if (userBracket.right.right && userBracket.right.team.correct == null) {
+        userBracket.right = AddResultsToUserBracket(correctBracket.right, userBracket.right);
+    }
+    if (correctBracket.team.teamName == userBracket.team.teamName) {
+        userBracket.team.correct = true;
+    } else {
+        userBracket.team.correct = false;
+    }
+    return userBracket;
+}
+
+function ScoreBracket(correctBracket: TreeNode, userBracket: TreeNode): Result {
+    return new Result();
+}
 
 function CreateCompleteCorrectBracket(data): TreeNode {
     var blankBracket: TreeNode = CreateBlankBracket(data);
     var finishedBracket: TreeNode = FillOutCorrectBracket(blankBracket, data);
-
     return finishedBracket;
 }
 
@@ -127,7 +147,8 @@ function FillOutCorrectBracket(node: TreeNode, data): TreeNode {
     }
 
     return node;
- }
+}
+
 function CreateBlankBracket(data?, depth?: number) : TreeNode{
     if (!depth) {
         depth = 0;
