@@ -17,6 +17,7 @@ class Result {
     eliteEight: number;
     finalFour: number;
     championship: number;
+    collective: number[];
     constructor() {
         this.firstRound = 0;
         this.secondRound = 0;
@@ -24,6 +25,7 @@ class Result {
         this.eliteEight = 0;
         this.finalFour = 0;
         this.championship = 0;
+        this.collective = [0,0,0,0,0,0];
     }
 }
 
@@ -44,25 +46,46 @@ class TreeNode {
 }
 //Main
 declare function require(name: string);
+var seedPerformance = require('../Data/seedPerformance.json');
 var bracketData = require('../Data/2015.json');
 var currentTeam = 0;
 var seedOrder: number[] = [1,16,8,9,5,12,4,13,6,11,3,14,7,10,2,15];
-var bracketRoot: TreeNode = CreateBlankBracket(bracketData);
-var filledOutUserBracket: TreeNode = FillOutBracket(bracketRoot, LogXSeedDifference);
-console.log(filledOutUserBracket.team.teamName);
-currentTeam = 0;
-var completeCorrectBracket = CreateCompleteCorrectBracket(bracketData);
-var userBracketWithResults = AddResultsToUserBracket(completeCorrectBracket, filledOutUserBracket);
-console.log(userBracketWithResults.team.correct);
-var results: Result = GiveResults(userBracketWithResults);
-console.log(results);
+var bestResult: Result = new Result();
+for (let i = 0; i < 1000000; i++) {
+    bestResult = GiveBestResult(bestResult, Simulate(bracketData, LogXSeedDifference));
+    if (i%100000==0) {
+        console.log("" + i + ": " + bestResult.collective);
+    }
+}
+console.log(bestResult.collective);
 //EndMain
 
-function GiveResults(bracket: TreeNode, result?: Result): Result {
-    let output;
-    if (!result) {
-        output = new Result();
+function Simulate(data, algorith): Result {
+    var bracketRoot: TreeNode = CreateBlankBracket(data);
+    var filledOutUserBracket: TreeNode = FillOutBracket(bracketRoot, algorith);
+    var completeCorrectBracket = CreateCompleteCorrectBracket(data);
+    var userBracketWithResults = AddResultsToUserBracket(completeCorrectBracket, filledOutUserBracket);
+    var results: Result = GiveResults(userBracketWithResults);
+    return results;
+}
+
+function GiveBestResult(result1: Result, result2: Result): Result {
+    let result1Total = 0;
+    let result2Total = 0;
+    for (let i = 0; i < result1.collective.length; i++) {
+        result1Total += result1.collective[i];
+        result2Total += result2.collective[i];
+    }
+    if (result1Total >= result2Total) {
+        return result1;
     } else {
+        return result2;
+    }
+}
+
+function GiveResults(bracket: TreeNode, result?: Result): Result {
+    let output = new Result();
+    if (result) {
         output = result;
     }
     if (bracket.left.left) {
@@ -75,21 +98,27 @@ function GiveResults(bracket: TreeNode, result?: Result): Result {
         switch (bracket.depth) {
             case 0:
                 output.championship++;
+                output.collective[5]++;
                 break;
             case 1:
                 output.finalFour++;
+                output.collective[4]++;
                 break;
             case 2:
                 output.eliteEight++;
+                output.collective[3]++;
                 break;
             case 3:
                 output.sweetSixteen++;
+                output.collective[2]++;
                 break;
             case 4:
                 output.secondRound++;
+                output.collective[1]++;
                 break;
             case 5:
                 output.firstRound++;
+                output.collective[0]++;
                 break;
         }
     }
@@ -197,17 +226,22 @@ function FillOutCorrectBracket(node: TreeNode, data): TreeNode {
 }
 
 function CreateBlankBracket(data?, depth?: number) : TreeNode{
+    currentTeam = 0;
     if (!depth) {
         depth = 0;
     }
     if (!data) {
         data = bracketData;
     }
+    return CBB(data, depth);
+}
+
+function CBB(data, depth: number) : TreeNode {
     let root = new TreeNode(depth);
     if (depth < 6) {
-        root.left = CreateBlankBracket(data, depth+1);
+        root.left = CBB(data, depth+1);
         root.left.parent = root;
-        root.right = CreateBlankBracket(data, depth+1);
+        root.right = CBB(data, depth+1);
         root.right.parent = root;
     } else {
         root.team = new Team(seedOrder[(currentTeam)%16], data.Regions[Math.floor(currentTeam/16)].teams[seedOrder[(currentTeam)%16]-1]);
@@ -237,8 +271,32 @@ function FillOutBracket(node: TreeNode, algorith) : TreeNode {
     }
 }
 
+function HistoricalData(team1: Team, team2: Team): Team {
+    let performance = seedPerformance.performances[team1.seed-1].performance[team2.seed-1];
+    let amplitude = seedPerformance.performances[team1.seed-1].amplitude[team2.seed-1];
+    let oddsOfWinning = performance;
+
+    if (performance == null) {
+        return BestTeamWins(team1, team2);
+    } else if (oddsOfWinning > Math.random()) {
+        return team1;
+    } else {
+        return team2;
+    }
+}
+
 function BestTeamWins(team1: Team, team2: Team): Team {
     if (team1.seed < team2.seed) {
+        return team1;
+    } else if (team1.seed == team2.seed && Math.random() > 0.5) {
+        return team1;
+    } else {
+        return team2;
+    }
+}
+
+function WorstTeamWins(team1: Team, team2: Team): Team {
+    if (team1.seed > team2.seed) {
         return team1;
     } else if (team1.seed == team2.seed && Math.random() > 0.5) {
         return team1;
@@ -263,5 +321,6 @@ function LogXSeedDifference(team1: Team, team2: Team): Team {
 }
 
 function LogCalculator(base: number, input: number): number {
-    return Math.log2(input)/Math.log2(base);
+    return Math.log(input)/Math.log(base);
+
 }
