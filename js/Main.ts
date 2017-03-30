@@ -44,11 +44,11 @@ var seedPerformance = require('../Data/seedPerformance.json');
 var bracketData = require('../Data/2015.json');
 var currentTeam = 0;
 var seedOrder: number[] = [1,16,8,9,5,12,4,13,6,11,3,14,7,10,2,15];
-var numberOfSimulations = 1000;
+var numberOfSimulations = 100000;
 var bestResult: Result = new Result();
 var totalResult: Result = new Result();
 for (let i = 0; i < numberOfSimulations; i++) {
-    let tempResult = Simulate(bracketData, LogXSeedDifference);
+    let tempResult = Simulate(bracketData, HistoricalData);
     for (let j = 0; j < tempResult.collective.length; j++) {
         totalResult.collective[j] += tempResult.collective[j];
     }
@@ -321,4 +321,12 @@ function LogXSeedDifference(team1: Team, team2: Team): Team {
 function LogCalculator(base: number, input: number): number {
     return Math.log(input)/Math.log(base);
 
+}
+
+function FlipACoin(team1: Team, team2: Team): Team {
+    if (Math.random() > 0.5) {
+        return team1;
+    } else {
+        return team2;
+    }
 }
