@@ -11,20 +11,14 @@ class Team {
 }
 
 class Result {
-    firstRound: number;
-    secondRound: number;
-    sweetSixteen: number;
-    eliteEight: number;
-    finalFour: number;
-    championship: number;
+    static firstRound: number = 0;
+    static secondRound: number = 1;
+    static sweetSixteen: number = 2;
+    static eliteEight: number = 3;
+    static finalFour: number = 4;
+    static championship: number = 5;
     collective: number[];
     constructor() {
-        this.firstRound = 0;
-        this.secondRound = 0;
-        this.sweetSixteen = 0;
-        this.eliteEight = 0;
-        this.finalFour = 0;
-        this.championship = 0;
         this.collective = [0,0,0,0,0,0];
     }
 }
@@ -50,14 +44,24 @@ var seedPerformance = require('../Data/seedPerformance.json');
 var bracketData = require('../Data/2015.json');
 var currentTeam = 0;
 var seedOrder: number[] = [1,16,8,9,5,12,4,13,6,11,3,14,7,10,2,15];
+var numberOfSimulations = 1000;
 var bestResult: Result = new Result();
-for (let i = 0; i < 1000000; i++) {
-    bestResult = GiveBestResult(bestResult, Simulate(bracketData, LogXSeedDifference));
+var totalResult: Result = new Result();
+for (let i = 0; i < numberOfSimulations; i++) {
+    let tempResult = Simulate(bracketData, LogXSeedDifference);
+    for (let j = 0; j < tempResult.collective.length; j++) {
+        totalResult.collective[j] += tempResult.collective[j];
+    }
+    bestResult = GiveBestResult(bestResult, tempResult);
     if (i%100000==0) {
         console.log("" + i + ": " + bestResult.collective);
     }
 }
-console.log(bestResult.collective);
+for (let i = 0; i < totalResult.collective.length; i++) {
+    totalResult.collective[i] = totalResult.collective[i]/numberOfSimulations;
+}
+console.log("Total Result: " + totalResult.collective);
+console.log("Best Result: " + bestResult.collective);
 //EndMain
 
 function Simulate(data, algorith): Result {
@@ -73,8 +77,8 @@ function GiveBestResult(result1: Result, result2: Result): Result {
     let result1Total = 0;
     let result2Total = 0;
     for (let i = 0; i < result1.collective.length; i++) {
-        result1Total += result1.collective[i];
-        result2Total += result2.collective[i];
+        result1Total += result1.collective[i]*(i+1);//Adding in *(i+1) makes each round more valuable
+        result2Total += result2.collective[i]*(i+1);
     }
     if (result1Total >= result2Total) {
         return result1;
@@ -97,28 +101,22 @@ function GiveResults(bracket: TreeNode, result?: Result): Result {
     if (bracket.team.correct) {
         switch (bracket.depth) {
             case 0:
-                output.championship++;
-                output.collective[5]++;
+                output.collective[Result.championship]++;
                 break;
             case 1:
-                output.finalFour++;
-                output.collective[4]++;
+                output.collective[Result.finalFour]++;
                 break;
             case 2:
-                output.eliteEight++;
-                output.collective[3]++;
+                output.collective[Result.eliteEight]++;
                 break;
             case 3:
-                output.sweetSixteen++;
-                output.collective[2]++;
+                output.collective[Result.sweetSixteen]++;
                 break;
             case 4:
-                output.secondRound++;
-                output.collective[1]++;
+                output.collective[Result.secondRound]++;
                 break;
             case 5:
-                output.firstRound++;
-                output.collective[0]++;
+                output.collective[Result.firstRound]++;
                 break;
         }
     }
