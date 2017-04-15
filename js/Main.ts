@@ -44,11 +44,11 @@ var seedPerformance = require('../Data/seedPerformance.json');
 var bracketData = require('../Data/2015.json');
 var currentTeam = 0;
 var seedOrder: number[] = [1,16,8,9,5,12,4,13,6,11,3,14,7,10,2,15];
-var numberOfSimulations = 100000;
+var numberOfSimulations = 10;
 var bestResult: Result = new Result();
 var totalResult: Result = new Result();
 for (let i = 0; i < numberOfSimulations; i++) {
-    let tempResult = Simulate(bracketData, HistoricalData);
+    let tempResult = SimulateAndGiveResult(bracketData, HistoricalData);
     for (let j = 0; j < tempResult.collective.length; j++) {
         totalResult.collective[j] += tempResult.collective[j];
     }
@@ -62,15 +62,43 @@ for (let i = 0; i < totalResult.collective.length; i++) {
 }
 console.log("Total Result: " + totalResult.collective);
 console.log("Best Result: " + bestResult.collective);
+window.onload = () => {
+    AddBracketToDOM(SimulateBracket(bracketData, HistoricalData));
+};
 //EndMain
 
-function Simulate(data, algorith): Result {
+function AddBracketToDOM(bracket: TreeNode) {
+    let firstRoundTeams: Team[] = GetAllFirstRoundTeams(bracket);
+    let roundOneGamesLi = document.querySelectorAll(".round-1 .game-top, .round-1 .game-bottom");
+    for(let i = 0; i < roundOneGamesLi.length; i++) {
+        roundOneGamesLi[i].textContent = firstRoundTeams[i].teamName;
+    }
+}
+
+function GetAllFirstRoundTeams(bracket: TreeNode): Team[] {
+    let output: Team[] = new Array<Team>();
+    if (bracket.left) {
+        output = output.concat(GetAllFirstRoundTeams(bracket.left));
+    }
+    if (bracket.right) {
+        output = output.concat(GetAllFirstRoundTeams(bracket.right));
+    }
+    if (!bracket.left && !bracket.right) {
+        output.push(bracket.team);
+    }
+    return output;
+}
+
+function SimulateAndGiveResult(data, algorith): Result {
+    return GiveResults(SimulateBracket(data, algorith));
+}
+
+function SimulateBracket(data, algorith): TreeNode {
     var bracketRoot: TreeNode = CreateBlankBracket(data);
     var filledOutUserBracket: TreeNode = FillOutBracket(bracketRoot, algorith);
-    var completeCorrectBracket = CreateCompleteCorrectBracket(data);
-    var userBracketWithResults = AddResultsToUserBracket(completeCorrectBracket, filledOutUserBracket);
-    var results: Result = GiveResults(userBracketWithResults);
-    return results;
+    var completeCorrectBracket: TreeNode = CreateCompleteCorrectBracket(data);
+    var userBracketWithResults: TreeNode = AddResultsToUserBracket(completeCorrectBracket, filledOutUserBracket);
+    return userBracketWithResults;
 }
 
 function GiveBestResult(result1: Result, result2: Result): Result {
