@@ -1,0 +1,22 @@
+{
+  "name": "bracket-web-page",
+  "version": "1.0.0",
+  "description": "* Install Typescript (npm install -g typescript) * Install Browserify (npm install -g browserify) * git clone [git@github.com:kanestapler/Bracket-Web-Page.git](https://github.com/kanestapler/Bracket-Web-Page) * cd Bracket\\ Web\\ Page/ * tsc js/*.ts * browserify Main.js -o output.js * Open index.html",
+  "main": "Main.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kanestapler/Bracket-Web-Page.git"
+  },
+  "author": "Kane Stapler",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kanestapler/Bracket-Web-Page/issues"
+  },
+  "homepage": "https://github.com/kanestapler/Bracket-Web-Page#readme",
+  "dependencies": {
+    "lodash": "^4.17.4"
+  }
+}

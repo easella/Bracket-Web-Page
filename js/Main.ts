@@ -42,18 +42,24 @@ class TreeNode {
 declare function require(name: string);
 var seedPerformance = require('../Data/seedPerformance.json');
 var bracketData = require('../Data/2015.json');
+var _ = require('lodash');
 var currentTeam = 0;
 var seedOrder: number[] = [1,16,8,9,5,12,4,13,6,11,3,14,7,10,2,15];
-var numberOfSimulations = 10;
+var numberOfSimulations = 1000;
 var bestResult: Result = new Result();
+var bestBracket: TreeNode;
 var totalResult: Result = new Result();
 for (let i = 0; i < numberOfSimulations; i++) {
-    let tempResult = SimulateAndGiveResult(bracketData, HistoricalData);
+    let tempBracket: TreeNode = SimulateBracket(bracketData, HistoricalData);
+    let tempResult: Result = GiveResults(tempBracket);
     for (let j = 0; j < tempResult.collective.length; j++) {
         totalResult.collective[j] += tempResult.collective[j];
     }
-    bestResult = GiveBestResult(bestResult, tempResult);
-    if (i%100000==0) {
+    if (GiveBestResult(bestResult, tempResult) == tempResult) {
+        bestResult = tempResult;
+        bestBracket = tempBracket;
+    }
+    if (i%10000==0) {
         console.log("" + i + ": " + bestResult.collective);
     }
 }
@@ -63,15 +69,39 @@ for (let i = 0; i < totalResult.collective.length; i++) {
 console.log("Total Result: " + totalResult.collective);
 console.log("Best Result: " + bestResult.collective);
 window.onload = () => {
-    AddBracketToDOM(SimulateBracket(bracketData, HistoricalData));
+    AddBracketToDOM(bestBracket);
 };
+
 //EndMain
 
 function AddBracketToDOM(bracket: TreeNode) {
     let firstRoundTeams: Team[] = GetAllFirstRoundTeams(bracket);
+    let secondRoundTeams: Team[] = GetAllSecondRoundTeams(bracket);
+    let sweetSixteenTeams: Team[] = GetSweetSixteenTeams(bracket);
+    let eliteEightTeams: Team[] = GetEliteEightTeams(bracket);
+    let finalFourTeams: Team[] = GetFinalFourTeams(bracket);
     let roundOneGamesLi = document.querySelectorAll(".round-1 .game-top, .round-1 .game-bottom");
+    let roundTwoGamesLi = document.querySelectorAll(".round-2 .game-top, .round-2 .game-bottom");
+    let sweetSixteenGamesLi = document.querySelectorAll(".round-3 .game-top, .round-3 .game-bottom");
+    let eliteEightGamesLi = document.querySelectorAll(".round-4 .game-top, .round-4 .game-bottom");
+    let finalFourGamesLi = document.querySelectorAll(".round-5 .game-top");
     for(let i = 0; i < roundOneGamesLi.length; i++) {
         roundOneGamesLi[i].textContent = firstRoundTeams[i].teamName;
+    }
+    AddTeamsToDOM(roundTwoGamesLi, secondRoundTeams);
+    AddTeamsToDOM(sweetSixteenGamesLi, sweetSixteenTeams);
+    AddTeamsToDOM(eliteEightGamesLi, eliteEightTeams);
+    AddTeamsToDOM(finalFourGamesLi, finalFourTeams);
+}
+
+function AddTeamsToDOM(gameLi, teams: Team[]) {
+    for(let i = 0; i < gameLi.length; i++) {
+        gameLi[i].textContent = teams[i].teamName;
+        if (teams[i].correct) {
+            gameLi[i].className += " correct";
+        } else {
+            gameLi[i].className += " wrong";
+        }
     }
 }
 
@@ -84,6 +114,62 @@ function GetAllFirstRoundTeams(bracket: TreeNode): Team[] {
         output = output.concat(GetAllFirstRoundTeams(bracket.right));
     }
     if (!bracket.left && !bracket.right) {
+        output.push(bracket.team);
+    }
+    return output;
+}
+
+function GetAllSecondRoundTeams(bracket: TreeNode): Team[] {
+    let output: Team[] = new Array<Team>();
+    if (bracket.left.left) {
+        output = output.concat(GetAllSecondRoundTeams(bracket.left));
+    }
+    if (bracket.right.right) {
+        output = output.concat(GetAllSecondRoundTeams(bracket.right));
+    }
+    if (!bracket.left.left && !bracket.right.right) {
+        output.push(bracket.team);
+    }
+    return output;
+}
+
+function GetSweetSixteenTeams(bracket: TreeNode): Team[] {
+    let output: Team[] = new Array<Team>();
+    if (bracket.left.left.left) {
+        output = output.concat(GetSweetSixteenTeams(bracket.left));
+    }
+    if (bracket.right.right.right) {
+        output = output.concat(GetSweetSixteenTeams(bracket.right));
+    }
+    if (!bracket.left.left.left && !bracket.right.right.right) {
+        output.push(bracket.team);
+    }
+    return output;
+}
+
+function GetEliteEightTeams(bracket: TreeNode): Team[] {
+    let output: Team[] = new Array<Team>();
+    if (bracket.left.left.left.left) {
+        output = output.concat(GetEliteEightTeams(bracket.left));
+    }
+    if (bracket.right.right.right.right) {
+        output = output.concat(GetEliteEightTeams(bracket.right));
+    }
+    if (!bracket.left.left.left.left && !bracket.right.right.right.right) {
+        output.push(bracket.team);
+    }
+    return output;
+}
+
+function GetFinalFourTeams(bracket: TreeNode): Team[] {
+    let output: Team[] = new Array<Team>();
+    if (bracket.left.left.left.left.left) {
+        output = output.concat(GetFinalFourTeams(bracket.left));
+    }
+    if (bracket.right.right.right.right.right) {
+        output = output.concat(GetFinalFourTeams(bracket.right));
+    }
+    if (!bracket.left.left.left.left.left && !bracket.right.right.right.right.right) {
         output.push(bracket.team);
     }
     return output;
@@ -279,10 +365,10 @@ function CBB(data, depth: number) : TreeNode {
 
 function FillOutBracket(node: TreeNode, algorith) : TreeNode {
     if (!node.left.team) {
-        node.left.team = FillOutBracket(node.left, algorith).team;
+        node.left.team = _.cloneDeep(FillOutBracket(node.left, algorith).team);
     }
     if (!node.right.team) {
-        node.right.team = FillOutBracket(node.right, algorith).team;
+        node.right.team = _.cloneDeep(FillOutBracket(node.right, algorith).team);
     }
 
     let winningTeam: Team = algorith(node.left.team, node.right.team);
