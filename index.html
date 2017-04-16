@@ -4,454 +4,458 @@
 <script src="./js/output.js"></script>
 <html>
 
-    <head>
-        <title>Bracket Simulation</title>
-    </head>
-    <h1>2015 NCAA Tournament</h1>
-    <main id="tournament">
-        <ul class="round round-1">
-            <li class="spacer">&nbsp;</li>
+<head>
+    <title>Bracket Simulation</title>
+</head>
+<div>
+    <h1 style="display: inline;">2015 NCAA Tournament</h1>
+    <button id="simulateButton" type="button">Simulate</button>
+    <span class="inputVariables" style="float: right;">Number Of Simulations: <input type="number" name="NumberOfSimulations" value="100"></span>
+</div>
+<main id="tournament">
+    <ul class="round round-1">
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
-        </ul>
-        <ul class="round round-2">
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
+    </ul>
+    <ul class="round round-2">
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
-        </ul>
-        <ul class="round round-3">
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
+    </ul>
+    <ul class="round round-3">
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
-        </ul>
-        <ul class="round round-4">
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
+    </ul>
+    <ul class="round round-4">
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
-        </ul>
-        <ul class="round round-5">
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
+    </ul>
+    <ul class="round round-5">
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
+        <li class="game game-top"></li>
 
-            <li class="spacer">&nbsp;</li>
-        </ul>
-    </main>
-    <main id="tournament">
-        <ul class="round round-1">
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
+    </ul>
+</main>
+<main id="tournament">
+    <ul class="round round-1">
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
-        </ul>
-        <ul class="round round-2">
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
+    </ul>
+    <ul class="round round-2">
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
-        </ul>
-        <ul class="round round-3">
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
+    </ul>
+    <ul class="round round-3">
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
-        </ul>
-        <ul class="round round-4">
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
+    </ul>
+    <ul class="round round-4">
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
-        </ul>
-        <ul class="round round-5">
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
+    </ul>
+    <ul class="round round-5">
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
+        <li class="game game-top"></li>
 
-            <li class="spacer">&nbsp;</li>
-        </ul>
-    </main>
-    <main id="tournament">
-        <ul class="round round-1">
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
+    </ul>
+</main>
+<main id="tournament">
+    <ul class="round round-1">
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
-        </ul>
-        <ul class="round round-2">
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
+    </ul>
+    <ul class="round round-2">
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
-        </ul>
-        <ul class="round round-3">
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
+    </ul>
+    <ul class="round round-3">
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
-        </ul>
-        <ul class="round round-4">
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
+    </ul>
+    <ul class="round round-4">
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
-        </ul>
-        <ul class="round round-5">
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
+    </ul>
+    <ul class="round round-5">
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
+        <li class="game game-top"></li>
 
-            <li class="spacer">&nbsp;</li>
-        </ul>
-    </main>
-    <main id="tournament">
-        <ul class="round round-1">
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
+    </ul>
+</main>
+<main id="tournament">
+    <ul class="round round-1">
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
-        </ul>
-        <ul class="round round-2">
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
+    </ul>
+    <ul class="round round-2">
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
-        </ul>
-        <ul class="round round-3">
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
+    </ul>
+    <ul class="round round-3">
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
-        </ul>
-        <ul class="round round-4">
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
+    </ul>
+    <ul class="round round-4">
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
-            <li class="game game-spacer">&nbsp;</li>
-            <li class="game game-bottom"></li>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom"></li>
 
-            <li class="spacer">&nbsp;</li>
-        </ul>
-        <ul class="round round-5">
-            <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
+    </ul>
+    <ul class="round round-5">
+        <li class="spacer">&nbsp;</li>
 
-            <li class="game game-top"></li>
+        <li class="game game-top"></li>
 
-            <li class="spacer">&nbsp;</li>
-        </ul>
-    </main>
-    
+        <li class="spacer">&nbsp;</li>
+    </ul>
+</main>
+
 
 </html>

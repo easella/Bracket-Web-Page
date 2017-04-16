@@ -31,6 +31,14 @@ main{
   color: white;
 }
 
+.inputVariables {
+  float: right;
+}
+
+#simulateButton {
+  float: right;
+}
+
 /*
  *  General Styles
 */
