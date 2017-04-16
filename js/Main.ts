@@ -19,7 +19,7 @@ class Result {
     static championship: number = 5;
     collective: number[];
     constructor() {
-        this.collective = [0,0,0,0,0,0];
+        this.collective = [0, 0, 0, 0, 0, 0];
     }
 }
 
@@ -44,35 +44,55 @@ var seedPerformance = require('../Data/seedPerformance.json');
 var bracketData = require('../Data/2015.json');
 var _ = require('lodash');
 var currentTeam = 0;
-var seedOrder: number[] = [1,16,8,9,5,12,4,13,6,11,3,14,7,10,2,15];
+var seedOrder: number[] = [1, 16, 8, 9, 5, 12, 4, 13, 6, 11, 3, 14, 7, 10, 2, 15];
 var numberOfSimulations = 1000;
-var bestResult: Result = new Result();
-var bestBracket: TreeNode;
-var totalResult: Result = new Result();
-for (let i = 0; i < numberOfSimulations; i++) {
-    let tempBracket: TreeNode = SimulateBracket(bracketData, HistoricalData);
-    let tempResult: Result = GiveResults(tempBracket);
-    for (let j = 0; j < tempResult.collective.length; j++) {
-        totalResult.collective[j] += tempResult.collective[j];
-    }
-    if (GiveBestResult(bestResult, tempResult) == tempResult) {
-        bestResult = tempResult;
-        bestBracket = tempBracket;
-    }
-    if (i%10000==0) {
-        console.log("" + i + ": " + bestResult.collective);
-    }
-}
-for (let i = 0; i < totalResult.collective.length; i++) {
-    totalResult.collective[i] = totalResult.collective[i]/numberOfSimulations;
-}
-console.log("Total Result: " + totalResult.collective);
-console.log("Best Result: " + bestResult.collective);
+
 window.onload = () => {
-    AddBracketToDOM(bestBracket);
+    document.getElementById("simulateButton").onclick = function() {SimulateButtonClick()};
+    SimulateXTimesAndAddBestToDOM();
 };
 
 //EndMain
+
+function SimulateXTimesAndAddBestToDOM() {
+    let bestResult: Result = new Result();
+    let bestBracket: TreeNode;
+    let totalResult: Result = new Result();
+    for (let i = 0; i < numberOfSimulations; i++) {
+        let tempBracket: TreeNode = SimulateBracket(bracketData, HistoricalData);
+        let tempResult: Result = GiveResults(tempBracket);
+        for (let j = 0; j < tempResult.collective.length; j++) {
+            totalResult.collective[j] += tempResult.collective[j];
+        }
+        if (GiveBestResult(bestResult, tempResult) == tempResult) {
+            bestResult = tempResult;
+            bestBracket = tempBracket;
+        }
+        if (i % 10000 == 0) {
+            console.log("" + i + ": " + bestResult.collective);
+        }
+    }
+    for (let i = 0; i < totalResult.collective.length; i++) {
+        totalResult.collective[i] = totalResult.collective[i] / numberOfSimulations;
+    }
+    console.log("Total Result: " + totalResult.collective);
+    console.log("Best Result: " + bestResult.collective);
+    AddBracketToDOM(bestBracket);
+}
+
+function SimulateButtonClick() {
+    numberOfSimulations = parseInt((<HTMLInputElement>document.getElementById("number-of-simulations")).value);
+    //TODO remove correct and wrong classes from elements
+    let correctGames = document.querySelectorAll(".correct");
+    for (let i = 0; i < correctGames.length; i++) {
+        correctGames[i].classList.remove("correct");
+    }
+    let wrongGames = document.querySelectorAll(".wrong");
+    for (let i = 0; i < wrongGames.length; i++) {
+        wrongGames[i].classList.remove("wrong");
+    }
+    SimulateXTimesAndAddBestToDOM();
+}
 
 function AddBracketToDOM(bracket: TreeNode) {
     let firstRoundTeams: Team[] = GetAllFirstRoundTeams(bracket);
@@ -80,30 +100,39 @@ function AddBracketToDOM(bracket: TreeNode) {
     let sweetSixteenTeams: Team[] = GetSweetSixteenTeams(bracket);
     let eliteEightTeams: Team[] = GetEliteEightTeams(bracket);
     let finalFourTeams: Team[] = GetFinalFourTeams(bracket);
+    let championshipTeams: Team[] = GetChampionshipTeams(bracket);
+    let champion: Team[] = GetChampion(bracket);
     let roundOneGamesLi = document.querySelectorAll(".round-1 .game-top, .round-1 .game-bottom");
     let roundTwoGamesLi = document.querySelectorAll(".round-2 .game-top, .round-2 .game-bottom");
     let sweetSixteenGamesLi = document.querySelectorAll(".round-3 .game-top, .round-3 .game-bottom");
     let eliteEightGamesLi = document.querySelectorAll(".round-4 .game-top, .round-4 .game-bottom");
     let finalFourGamesLi = document.querySelectorAll(".round-5 .game-top");
-    for(let i = 0; i < roundOneGamesLi.length; i++) {
+    let finalFourChampionshipBracketLi = document.querySelectorAll(".final-four .game-top, .final-four .game-bottom");
+    let championshipBracketLi = document.querySelectorAll(".championship .game-top, .championship .game-bottom");
+    let championLi = document.querySelectorAll(".champion .game-top");
+    for (let i = 0; i < roundOneGamesLi.length; i++) {
         roundOneGamesLi[i].textContent = firstRoundTeams[i].teamName;
     }
     AddTeamsToDOM(roundTwoGamesLi, secondRoundTeams);
     AddTeamsToDOM(sweetSixteenGamesLi, sweetSixteenTeams);
     AddTeamsToDOM(eliteEightGamesLi, eliteEightTeams);
     AddTeamsToDOM(finalFourGamesLi, finalFourTeams);
+    AddTeamsToDOM(finalFourChampionshipBracketLi, finalFourTeams);
+    AddTeamsToDOM(championshipBracketLi, championshipTeams);
+    AddTeamsToDOM(championLi, champion);
 }
 
 function AddTeamsToDOM(gameLi, teams: Team[]) {
-    for(let i = 0; i < gameLi.length; i++) {
+    for (let i = 0; i < gameLi.length; i++) {
         gameLi[i].textContent = teams[i].teamName;
         if (teams[i].correct) {
-            gameLi[i].className += " correct";
+            gameLi[i].classList.add("correct");
         } else {
-            gameLi[i].className += " wrong";
+            gameLi[i].classList.add("wrong");
         }
     }
 }
+
 
 function GetAllFirstRoundTeams(bracket: TreeNode): Team[] {
     let output: Team[] = new Array<Team>();
@@ -175,6 +204,19 @@ function GetFinalFourTeams(bracket: TreeNode): Team[] {
     return output;
 }
 
+function GetChampionshipTeams(bracket: TreeNode): Team[] {
+    let output: Team[] = new Array<Team>();
+    output.push(bracket.left.team);
+    output.push(bracket.right.team);
+    return output;
+}
+
+function GetChampion(bracket: TreeNode): Team[] {
+    let output: Team[] = new Array<Team>();
+    output.push(bracket.team);
+    return output;
+}
+
 function SimulateAndGiveResult(data, algorith): Result {
     return GiveResults(SimulateBracket(data, algorith));
 }
@@ -191,8 +233,8 @@ function GiveBestResult(result1: Result, result2: Result): Result {
     let result1Total = 0;
     let result2Total = 0;
     for (let i = 0; i < result1.collective.length; i++) {
-        result1Total += result1.collective[i]*(i+1);//Adding in *(i+1) makes each round more valuable
-        result2Total += result2.collective[i]*(i+1);
+        result1Total += result1.collective[i] * (i + 1);//Adding in *(i+1) makes each round more valuable
+        result2Total += result2.collective[i] * (i + 1);
     }
     if (result1Total >= result2Total) {
         return result1;
@@ -267,7 +309,7 @@ function FillOutCorrectBracket(node: TreeNode, data): TreeNode {
         node.left.team = FillOutCorrectBracket(node.left, data).team;
     }
     if (!node.right.team) {
-        node.right.team  = FillOutCorrectBracket(node.right, data).team;
+        node.right.team = FillOutCorrectBracket(node.right, data).team;
     }
 
     //Not good. Should find a better way soon
@@ -320,7 +362,7 @@ function FillOutCorrectBracket(node: TreeNode, data): TreeNode {
                         node.team = node.left.team;
                         j = regionWinners.length + 1;
                         i = data.Regions.length + 1;
-                    } else if ( node.right.team.seed == regionWinners[j]) {
+                    } else if (node.right.team.seed == regionWinners[j]) {
                         node.team = node.right.team;
                         j = regionWinners.length + 1;
                         i = data.Regions.length + 1;
@@ -337,7 +379,7 @@ function FillOutCorrectBracket(node: TreeNode, data): TreeNode {
     return node;
 }
 
-function CreateBlankBracket(data?, depth?: number) : TreeNode{
+function CreateBlankBracket(data?, depth?: number): TreeNode {
     currentTeam = 0;
     if (!depth) {
         depth = 0;
@@ -348,22 +390,22 @@ function CreateBlankBracket(data?, depth?: number) : TreeNode{
     return CBB(data, depth);
 }
 
-function CBB(data, depth: number) : TreeNode {
+function CBB(data, depth: number): TreeNode {
     let root = new TreeNode(depth);
     if (depth < 6) {
-        root.left = CBB(data, depth+1);
+        root.left = CBB(data, depth + 1);
         root.left.parent = root;
-        root.right = CBB(data, depth+1);
+        root.right = CBB(data, depth + 1);
         root.right.parent = root;
     } else {
-        root.team = new Team(seedOrder[(currentTeam)%16], data.Regions[Math.floor(currentTeam/16)].teams[seedOrder[(currentTeam)%16]-1]);
-        root.team.region = data.Regions[Math.floor(currentTeam/16)].regionName;
+        root.team = new Team(seedOrder[(currentTeam) % 16], data.Regions[Math.floor(currentTeam / 16)].teams[seedOrder[(currentTeam) % 16] - 1]);
+        root.team.region = data.Regions[Math.floor(currentTeam / 16)].regionName;
         currentTeam++;
     }
     return root;
 }
 
-function FillOutBracket(node: TreeNode, algorith) : TreeNode {
+function FillOutBracket(node: TreeNode, algorith): TreeNode {
     if (!node.left.team) {
         node.left.team = _.cloneDeep(FillOutBracket(node.left, algorith).team);
     }
@@ -384,8 +426,8 @@ function FillOutBracket(node: TreeNode, algorith) : TreeNode {
 }
 
 function HistoricalData(team1: Team, team2: Team): Team {
-    let performance = seedPerformance.performances[team1.seed-1].performance[team2.seed-1];
-    let amplitude = seedPerformance.performances[team1.seed-1].amplitude[team2.seed-1];
+    let performance = seedPerformance.performances[team1.seed - 1].performance[team2.seed - 1];
+    let amplitude = seedPerformance.performances[team1.seed - 1].amplitude[team2.seed - 1];
     let oddsOfWinning = performance;
 
     if (performance == null) {
@@ -419,9 +461,9 @@ function WorstTeamWins(team1: Team, team2: Team): Team {
 
 function LogXSeedDifference(team1: Team, team2: Team): Team {
     var logBase: number = 2;
-    let seedDifference: number = Math.abs(team1.seed-team2.seed);
+    let seedDifference: number = Math.abs(team1.seed - team2.seed);
     let numberOfFlips: number = LogCalculator(logBase, seedDifference);
-    let oddsOfWinning: number = Math.pow(0.5,numberOfFlips);
+    let oddsOfWinning: number = Math.pow(0.5, numberOfFlips);
     let lowSeededTeam: Team = (team1.seed <= team2.seed) ? team1 : team2;
     let highSeededTeam: Team = (team1.seed > team2.seed) ? team1 : team2;
 
@@ -433,7 +475,7 @@ function LogXSeedDifference(team1: Team, team2: Team): Team {
 }
 
 function LogCalculator(base: number, input: number): number {
-    return Math.log(input)/Math.log(base);
+    return Math.log(input) / Math.log(base);
 
 }
 
