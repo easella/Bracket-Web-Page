@@ -48,6 +48,7 @@ var seedOrder: number[] = [1, 16, 8, 9, 5, 12, 4, 13, 6, 11, 3, 14, 7, 10, 2, 15
 var statText: string[] = ["First Round: ", "Second Round: ", "Sweet Sixteen: ", "Elite Eight: ", "Final Four: ", "Championship: "];
 var numberOfSimulations = 1000;
 var algorithmToUse = HistoricalData;
+var scoringSystemToUse = PointPerRound;
 
 window.onload = () => {
     document.getElementById("simulateButton").onclick = function() {SimulateButtonClick()};
@@ -66,7 +67,7 @@ function SimulateAndAddBestToDOM() {
         for (let j = 0; j < tempResult.collective.length; j++) {
             totalResult.collective[j] += tempResult.collective[j];
         }
-        if (GiveBestResult(bestResult, tempResult) == tempResult) {
+        if (scoringSystemToUse(bestResult, tempResult) == tempResult) {
             bestResult = tempResult;
             bestBracket = tempBracket;
             AddBracketToDOM(bestBracket);
@@ -92,6 +93,7 @@ function DisplayResult(results: Result, resultDOM: NodeListOf<Element>) {
 function SimulateButtonClick() {
     numberOfSimulations = parseInt((<HTMLInputElement>document.getElementById("number-of-simulations")).value);
     SetAlgorithm((<HTMLInputElement>document.getElementById('algorithmSelect')).value);
+    SetScoringSystem((<HTMLInputElement>document.getElementById('scoringSelect')).value);
     RemoveClass("correct");
     RemoveClass("wrong");
     SimulateAndAddBestToDOM();
@@ -101,6 +103,16 @@ function RemoveClass(classToRemove: string) {
     let objects = document.querySelectorAll("."+classToRemove);
     for (let i = 0; i < objects.length; i++) {
         objects[i].classList.remove(classToRemove);
+    }
+}
+
+function SetScoringSystem(input: string) {
+    if (input == "game") {
+        scoringSystemToUse = PointPerGame;
+    } else if (input == "round") {
+        scoringSystemToUse = PointPerRound;
+    } else {
+        console.log("Wrong Scoring System Used");
     }
 }
 
@@ -253,12 +265,26 @@ function SimulateBracket(data, algorith): TreeNode {
     return userBracketWithResults;
 }
 
-function GiveBestResult(result1: Result, result2: Result): Result {
+function PointPerRound(result1: Result, result2: Result): Result {
     let result1Total = 0;
     let result2Total = 0;
     for (let i = 0; i < result1.collective.length; i++) {
         result1Total += result1.collective[i] * (i + 1);//Adding in *(i+1) makes each round more valuable
         result2Total += result2.collective[i] * (i + 1);
+    }
+    if (result1Total >= result2Total) {
+        return result1;
+    } else {
+        return result2;
+    }
+}
+
+function PointPerGame(result1: Result, result2: Result): Result {
+    let result1Total = 0;
+    let result2Total = 0;
+    for (let i = 0; i < result1.collective.length; i++) {
+        result1Total += result1.collective[i];
+        result2Total += result2.collective[i];
     }
     if (result1Total >= result2Total) {
         return result1;
@@ -316,10 +342,6 @@ function AddResultsToUserBracket(correctBracket: TreeNode, userBracket: TreeNode
         userBracket.team.correct = false;
     }
     return userBracket;
-}
-
-function ScoreBracket(correctBracket: TreeNode, userBracket: TreeNode): Result {
-    return new Result();
 }
 
 function CreateCompleteCorrectBracket(data): TreeNode {

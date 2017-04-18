@@ -43,6 +43,10 @@ main{
   float: right;
 }
 
+#scoringSelect {
+  float: right;
+}
+
 .stats {
   float: right;
 }
