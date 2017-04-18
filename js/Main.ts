@@ -41,7 +41,8 @@ class TreeNode {
 //Main
 declare function require(name: string);
 var seedPerformance = require('../Data/seedPerformance.json');
-var bracketData = require('../Data/2015.json');
+var bracketData2015 = require('../Data/2015.json');
+var bracketData2017 = require('../Data/2017.json');
 var _ = require('lodash');
 var currentTeam = 0;
 var seedOrder: number[] = [1, 16, 8, 9, 5, 12, 4, 13, 6, 11, 3, 14, 7, 10, 2, 15];
@@ -49,6 +50,7 @@ var statText: string[] = ["First Round: ", "Second Round: ", "Sweet Sixteen: ", 
 var numberOfSimulations = 1000;
 var algorithmToUse = HistoricalData;
 var scoringSystemToUse = PointPerRound;
+var bracketData = bracketData2015;
 
 window.onload = () => {
     document.getElementById("simulateButton").onclick = function() {SimulateButtonClick()};
@@ -93,6 +95,7 @@ function SimulateButtonClick() {
     numberOfSimulations = parseInt((<HTMLInputElement>document.getElementById("number-of-simulations")).value);
     SetAlgorithm((<HTMLInputElement>document.getElementById('algorithmSelect')).value);
     SetScoringSystem((<HTMLInputElement>document.getElementById('scoringSelect')).value);
+    SetBracketYear((<HTMLInputElement>document.getElementById('yearSelect')).value);
     RemoveClass("correct");
     RemoveClass("wrong");
     SimulateAndAddBestToDOM();
@@ -102,6 +105,16 @@ function RemoveClass(classToRemove: string) {
     let objects = document.querySelectorAll("."+classToRemove);
     for (let i = 0; i < objects.length; i++) {
         objects[i].classList.remove(classToRemove);
+    }
+}
+
+function SetBracketYear(input: string) {
+    if (input == "2015") {
+        bracketData = bracketData2015;
+    } else if (input == "2017") {
+        bracketData = bracketData2017;
+    } else {
+        console.log("Wrong Year Chosen");
     }
 }
 
@@ -166,7 +179,6 @@ function AddRegionHeaders(bracket: TreeNode, regionHeadings: NodeListOf<Element>
     regionNames.push(bracket.right.left.team.region);
     regionNames.push(bracket.right.right.team.region);
     for (let i = 0; i < 4; i++) {
-        console.log(regionHeadings);
         regionHeadings[i].textContent = regionNames[i];
     }
 }

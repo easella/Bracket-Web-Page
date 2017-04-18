@@ -39,11 +39,7 @@ main{
   float: right;
 }
 
-#algorithmSelect {
-  float: right;
-}
-
-#scoringSelect {
+select.options {
   float: right;
 }
 

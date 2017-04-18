@@ -110,24 +110,6 @@
         }
     ],
     "FF": {
-        "teams": [
-            {
-                "name": "Kentucky",
-                "seed": 1
-            },
-            {
-                "name": "Wisconsin",
-                "seed": 1
-            },
-            {
-                "name": "Michigan State",
-                "seed": 7
-            },
-            {
-                "name": "Duke",
-                "seed": 1
-            }
-        ],
         "winners": {
             "finalFour": [
                 "Wisconsin",

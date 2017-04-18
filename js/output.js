@@ -111,24 +111,6 @@ module.exports={
         }
     ],
     "FF": {
-        "teams": [
-            {
-                "name": "Kentucky",
-                "seed": 1
-            },
-            {
-                "name": "Wisconsin",
-                "seed": 1
-            },
-            {
-                "name": "Michigan State",
-                "seed": 7
-            },
-            {
-                "name": "Duke",
-                "seed": 1
-            }
-        ],
         "winners": {
             "finalFour": [
                 "Wisconsin",
@@ -139,6 +121,128 @@ module.exports={
     }
 }
 },{}],2:[function(require,module,exports){
+module.exports={
+    "Regions": [
+        {
+            "teams": [
+                    "Villanova",
+                    "Duke",
+                    "Baylor",
+                    "Florida",
+                    "Virginia",
+                    "SMU",
+                    "South Carolina",
+                    "Wisconsin",
+                    "Virginia Tech",
+                    "Marquette",
+                    "USC",
+                    "UNC Wilmington",
+                    "East Tennessee State",
+                    "New Mexico State",
+                    "Troy",
+                    "Mount St Mary's"
+                ],
+                "winners": {
+                    "firstRound": [1,8,5,4,11,3,7,2],
+                    "secondRound": [8,4,3,7],
+                    "thirdRound": [4,7],
+                    "fourthRound": 7
+                },
+                "regionName": "East"
+        },
+        {
+            "teams": [
+                "Gonzaga",
+                "Arizona",
+                "Florida State",
+                "West Virginia",
+                    "Notre Dame",
+                    "Maryland",
+                    "Saint Mary's",
+                    "Northwestern",
+                    "Vanderbilt",
+                    "VCU",
+                    "Xavier",
+                    "Princeton",
+                    "Bucknell",
+                    "Florida Gulf Coast",
+                    "North Dakota",
+                    "South Dakota State"
+            ],
+            "winners": {
+                "firstRound": [1,8,5,4,11,3,7,2],
+                "secondRound": [1,4,11,2],
+                "thirdRound": [1,11],
+                "fourthRound": 1
+            },
+            "regionName": "West"
+        },
+        {
+            "teams": [
+                "Kansas",
+                    "Louisville",
+                    "Oregon",
+                    "Purdue",
+                    "Iowa State",
+                    "Creighton",
+                    "Michigan",
+                    "Miami",
+                    "Michigan State",
+                    "Oklahoma State",
+                    "Rhode Island",
+                    "Nevada",
+                    "Vermont",
+                    "Iona",
+                    "Jacksonville State",
+                    "UC Davis"
+            ],
+            "winners": {
+                "firstRound": [1,9,5,4,11,3,7,2],
+                "secondRound": [1,4,3,7],
+                "thirdRound": [1,3],
+                "fourthRound": 3
+            },
+            "regionName": "Midwest"
+        },
+        {
+            "teams": [
+                "North Carolina",
+                    "Kentucky",
+                    "UCLA",
+                    "Butler",
+                    "Minnesota",
+                    "Cincinnati",
+                    "Dayton",
+                    "Arkansas",
+                    "Seton Hall",
+                    "Wichita State",
+                    "Kansas State",
+                    "Middle Tennessee",
+                    "Winthrop",
+                    "Kent State",
+                    "Northern Kentucky",
+                    "Texas Southern"
+            ],
+            "winners": {
+                "firstRound": [1,8,12,4,6,3,10,2],
+                "secondRound": [1,4,3,2],
+                "thirdRound": [1,2],
+                "fourthRound": 1
+            },
+            "regionName": "South"
+        }
+    ],
+    "FF": {
+        "winners": {
+            "finalFour": [
+                "Gonzaga",
+                "North Carolina"
+            ],
+            "championship": "North Carolina"
+        }
+    }
+}
+},{}],3:[function(require,module,exports){
 module.exports={
     "performances": [
         {
@@ -207,7 +311,7 @@ module.exports={
         }
     ]
 }
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 'use strict';
 var Team = (function () {
     function Team(seed, teamName) {
@@ -241,7 +345,8 @@ var TreeNode = (function () {
     return TreeNode;
 }());
 var seedPerformance = require('../Data/seedPerformance.json');
-var bracketData = require('../Data/2015.json');
+var bracketData2015 = require('../Data/2015.json');
+var bracketData2017 = require('../Data/2017.json');
 var _ = require('lodash');
 var currentTeam = 0;
 var seedOrder = [1, 16, 8, 9, 5, 12, 4, 13, 6, 11, 3, 14, 7, 10, 2, 15];
@@ -249,6 +354,7 @@ var statText = ["First Round: ", "Second Round: ", "Sweet Sixteen: ", "Elite Eig
 var numberOfSimulations = 1000;
 var algorithmToUse = HistoricalData;
 var scoringSystemToUse = PointPerRound;
+var bracketData = bracketData2015;
 window.onload = function () {
     document.getElementById("simulateButton").onclick = function () { SimulateButtonClick(); };
     SimulateAndAddBestToDOM();
@@ -288,6 +394,7 @@ function SimulateButtonClick() {
     numberOfSimulations = parseInt(document.getElementById("number-of-simulations").value);
     SetAlgorithm(document.getElementById('algorithmSelect').value);
     SetScoringSystem(document.getElementById('scoringSelect').value);
+    SetBracketYear(document.getElementById('yearSelect').value);
     RemoveClass("correct");
     RemoveClass("wrong");
     SimulateAndAddBestToDOM();
@@ -296,6 +403,17 @@ function RemoveClass(classToRemove) {
     var objects = document.querySelectorAll("." + classToRemove);
     for (var i = 0; i < objects.length; i++) {
         objects[i].classList.remove(classToRemove);
+    }
+}
+function SetBracketYear(input) {
+    if (input == "2015") {
+        bracketData = bracketData2015;
+    }
+    else if (input == "2017") {
+        bracketData = bracketData2017;
+    }
+    else {
+        console.log("Wrong Year Chosen");
     }
 }
 function SetScoringSystem(input) {
@@ -361,7 +479,6 @@ function AddRegionHeaders(bracket, regionHeadings) {
     regionNames.push(bracket.right.left.team.region);
     regionNames.push(bracket.right.right.team.region);
     for (var i = 0; i < 4; i++) {
-        console.log(regionHeadings);
         regionHeadings[i].textContent = regionNames[i];
     }
 }
@@ -735,7 +852,7 @@ function FlipACoin(team1, team2) {
     }
 }
 
-},{"../Data/2015.json":1,"../Data/seedPerformance.json":2,"lodash":4}],4:[function(require,module,exports){
+},{"../Data/2015.json":1,"../Data/2017.json":2,"../Data/seedPerformance.json":3,"lodash":5}],5:[function(require,module,exports){
 (function (global){
 /**
  * @license
@@ -17823,4 +17940,4 @@ function FlipACoin(team1, team2) {
 }.call(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}]},{},[3]);
+},{}]},{},[4]);
