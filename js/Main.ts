@@ -45,21 +45,23 @@ var bracketData = require('../Data/2015.json');
 var _ = require('lodash');
 var currentTeam = 0;
 var seedOrder: number[] = [1, 16, 8, 9, 5, 12, 4, 13, 6, 11, 3, 14, 7, 10, 2, 15];
+var statText: string[] = ["First Round: ", "Second Round: ", "Sweet Sixteen: ", "Elite Eight: ", "Final Four: ", "Championship: "];
 var numberOfSimulations = 1000;
+var algorithmToUse = HistoricalData;
 
 window.onload = () => {
     document.getElementById("simulateButton").onclick = function() {SimulateButtonClick()};
-    SimulateXTimesAndAddBestToDOM();
+    SimulateAndAddBestToDOM();
 };
 
 //EndMain
 
-function SimulateXTimesAndAddBestToDOM() {
+function SimulateAndAddBestToDOM() {
     let bestResult: Result = new Result();
     let bestBracket: TreeNode;
     let totalResult: Result = new Result();
     for (let i = 0; i < numberOfSimulations; i++) {
-        let tempBracket: TreeNode = SimulateBracket(bracketData, HistoricalData);
+        let tempBracket: TreeNode = SimulateBracket(bracketData, algorithmToUse);
         let tempResult: Result = GiveResults(tempBracket);
         for (let j = 0; j < tempResult.collective.length; j++) {
             totalResult.collective[j] += tempResult.collective[j];
@@ -67,6 +69,7 @@ function SimulateXTimesAndAddBestToDOM() {
         if (GiveBestResult(bestResult, tempResult) == tempResult) {
             bestResult = tempResult;
             bestBracket = tempBracket;
+            AddBracketToDOM(bestBracket);
         }
         if (i % 10000 == 0) {
             console.log("" + i + ": " + bestResult.collective);
@@ -75,23 +78,42 @@ function SimulateXTimesAndAddBestToDOM() {
     for (let i = 0; i < totalResult.collective.length; i++) {
         totalResult.collective[i] = totalResult.collective[i] / numberOfSimulations;
     }
-    console.log("Total Result: " + totalResult.collective);
-    console.log("Best Result: " + bestResult.collective);
+    DisplayResult(totalResult, document.querySelectorAll("#averageGamesWon .results"));
+    DisplayResult(bestResult, document.querySelectorAll("#bestBracket .results"));
     AddBracketToDOM(bestBracket);
+}
+
+function DisplayResult(results: Result, resultDOM: NodeListOf<Element>) {
+    for (let i = 0; i < results.collective.length; i++) {
+        resultDOM[i].textContent = statText[i] + results.collective[i];
+    }
 }
 
 function SimulateButtonClick() {
     numberOfSimulations = parseInt((<HTMLInputElement>document.getElementById("number-of-simulations")).value);
-    //TODO remove correct and wrong classes from elements
-    let correctGames = document.querySelectorAll(".correct");
-    for (let i = 0; i < correctGames.length; i++) {
-        correctGames[i].classList.remove("correct");
+    SetAlgorithm((<HTMLInputElement>document.getElementById('algorithmSelect')).value);
+    RemoveClass("correct");
+    RemoveClass("wrong");
+    SimulateAndAddBestToDOM();
+}
+
+function RemoveClass(classToRemove: string) {
+    let objects = document.querySelectorAll("."+classToRemove);
+    for (let i = 0; i < objects.length; i++) {
+        objects[i].classList.remove(classToRemove);
     }
-    let wrongGames = document.querySelectorAll(".wrong");
-    for (let i = 0; i < wrongGames.length; i++) {
-        wrongGames[i].classList.remove("wrong");
+}
+
+function SetAlgorithm(input: string) {
+    if (input == "historical") {
+        algorithmToUse = HistoricalData;
+    } else if (input == "log2") {
+        algorithmToUse = LogXSeedDifference;
+    } else if (input == "random") {
+        algorithmToUse = FlipACoin;
+    } else {
+        console.log("Algorithm chosen is wrong");
     }
-    SimulateXTimesAndAddBestToDOM();
 }
 
 function AddBracketToDOM(bracket: TreeNode) {
@@ -113,6 +135,8 @@ function AddBracketToDOM(bracket: TreeNode) {
     for (let i = 0; i < roundOneGamesLi.length; i++) {
         roundOneGamesLi[i].textContent = firstRoundTeams[i].teamName;
     }
+    RemoveClass("correct");
+    RemoveClass("wrong");
     AddTeamsToDOM(roundTwoGamesLi, secondRoundTeams);
     AddTeamsToDOM(sweetSixteenGamesLi, sweetSixteenTeams);
     AddTeamsToDOM(eliteEightGamesLi, eliteEightTeams);

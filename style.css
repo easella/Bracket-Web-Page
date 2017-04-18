@@ -39,6 +39,18 @@ main{
   float: right;
 }
 
+#algorithmSelect {
+  float: right;
+}
+
+.stats {
+  float: right;
+}
+
+.stats-header {
+  font-weight: bold;
+}
+
 /*
  *  General Styles
 */
