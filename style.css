@@ -55,6 +55,10 @@ main{
   font-weight: bold;
 }
 
+.region-heading {
+  margin-bottom: 0px;
+}
+
 /*
  *  General Styles
 */

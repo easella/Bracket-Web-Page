@@ -70,7 +70,6 @@ function SimulateAndAddBestToDOM() {
         if (scoringSystemToUse(bestResult, tempResult) == tempResult) {
             bestResult = tempResult;
             bestBracket = tempBracket;
-            AddBracketToDOM(bestBracket);
         }
         if (i % 10000 == 0) {
             console.log("" + i + ": " + bestResult.collective);
@@ -144,6 +143,7 @@ function AddBracketToDOM(bracket: TreeNode) {
     let finalFourChampionshipBracketLi = document.querySelectorAll(".final-four .game-top, .final-four .game-bottom");
     let championshipBracketLi = document.querySelectorAll(".championship .game-top, .championship .game-bottom");
     let championLi = document.querySelectorAll(".champion .game-top");
+    let regionHeaders = document.querySelectorAll(".region-heading:not(.final-four");
     for (let i = 0; i < roundOneGamesLi.length; i++) {
         roundOneGamesLi[i].textContent = firstRoundTeams[i].teamName;
     }
@@ -156,6 +156,19 @@ function AddBracketToDOM(bracket: TreeNode) {
     AddTeamsToDOM(finalFourChampionshipBracketLi, finalFourTeams);
     AddTeamsToDOM(championshipBracketLi, championshipTeams);
     AddTeamsToDOM(championLi, champion);
+    AddRegionHeaders(bracket, regionHeaders);
+}
+
+function AddRegionHeaders(bracket: TreeNode, regionHeadings: NodeListOf<Element>) {
+    let regionNames: string[] = new Array<string>();
+    regionNames.push(bracket.left.left.team.region);
+    regionNames.push(bracket.left.right.team.region);
+    regionNames.push(bracket.right.left.team.region);
+    regionNames.push(bracket.right.right.team.region);
+    for (let i = 0; i < 4; i++) {
+        console.log(regionHeadings);
+        regionHeadings[i].textContent = regionNames[i];
+    }
 }
 
 function AddTeamsToDOM(gameLi, teams: Team[]) {
