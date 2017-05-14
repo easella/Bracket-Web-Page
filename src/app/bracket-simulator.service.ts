@@ -11,7 +11,7 @@ export class BracketSimulatorService {
 
     algorithmUsed: Function;
 
-    seedPerformance: any = this.bracketDataService.getBracketData('../data/2015.json').subscribe(result => this.seedPerformance = result);
+    seedPerformance: any = this.bracketDataService.getBracketData('../data/seedPerformance.json').subscribe(result => this.seedPerformance = result);
 
     SimulateBracket(input: Bracket, algoritm: Algorithm): Bracket {
         switch (algoritm) {
