@@ -1,45 +1,8 @@
-'use strict';
-class Team {
-    seed: number;
-    teamName: string;
-    region: string;
-    correct: boolean;
-    constructor(seed: number, teamName: string) {
-        this.seed = seed;
-        this.teamName = teamName;
-    }
-}
+import { Team } from './../src/app/team';
+import { Result } from './../src/app/result';
+import { Bracket } from './../src/app/bracket';
 
-class Result {
-    static firstRound: number = 0;
-    static secondRound: number = 1;
-    static sweetSixteen: number = 2;
-    static eliteEight: number = 3;
-    static finalFour: number = 4;
-    static championship: number = 5;
-    collective: number[];
-    constructor() {
-        this.collective = [0, 0, 0, 0, 0, 0];
-    }
-}
-
-class TreeNode {
-    team: Team;
-    parent: TreeNode;
-    left: TreeNode;
-    right: TreeNode;
-    depth: number;
-    constructor(depth: number, parent?: TreeNode) {
-        this.depth = depth;
-        if (parent) {
-            this.parent = parent;
-        } else {
-            this.parent = null;
-        }
-    }
-}
 //Main
-declare function require(name: string);
 var seedPerformance = require('../Data/seedPerformance.json');
 var bracketData2015 = require('../Data/2015.json');
 var bracketData2017 = require('../Data/2017.json');
@@ -61,10 +24,10 @@ window.onload = () => {
 
 function SimulateAndAddBestToDOM() {
     let bestResult: Result = new Result();
-    let bestBracket: TreeNode;
+    let bestBracket: Bracket;
     let totalResult: Result = new Result();
     for (let i = 0; i < numberOfSimulations; i++) {
-        let tempBracket: TreeNode = SimulateBracket(bracketData, algorithmToUse);
+        let tempBracket: Bracket = SimulateBracket(bracketData, algorithmToUse);
         let tempResult: Result = GiveResults(tempBracket);
         for (let j = 0; j < tempResult.collective.length; j++) {
             totalResult.collective[j] += tempResult.collective[j];
@@ -140,7 +103,7 @@ function SetAlgorithm(input: string) {
     }
 }
 
-function AddBracketToDOM(bracket: TreeNode) {
+function AddBracketToDOM(bracket: Bracket) {
     let firstRoundTeams: Team[] = GetAllFirstRoundTeams(bracket);
     let secondRoundTeams: Team[] = GetAllSecondRoundTeams(bracket);
     let sweetSixteenTeams: Team[] = GetSweetSixteenTeams(bracket);
@@ -172,7 +135,7 @@ function AddBracketToDOM(bracket: TreeNode) {
     AddRegionHeaders(bracket, regionHeaders);
 }
 
-function AddRegionHeaders(bracket: TreeNode, regionHeadings: NodeListOf<Element>) {
+function AddRegionHeaders(bracket: Bracket, regionHeadings: NodeListOf<Element>) {
     let regionNames: string[] = new Array<string>();
     regionNames.push(bracket.left.left.team.region);
     regionNames.push(bracket.left.right.team.region);
@@ -194,99 +157,15 @@ function AddTeamsToDOM(gameLi, teams: Team[]) {
     }
 }
 
-
-function GetAllFirstRoundTeams(bracket: TreeNode): Team[] {
-    let output: Team[] = new Array<Team>();
-    if (bracket.left) {
-        output = output.concat(GetAllFirstRoundTeams(bracket.left));
-    }
-    if (bracket.right) {
-        output = output.concat(GetAllFirstRoundTeams(bracket.right));
-    }
-    if (!bracket.left && !bracket.right) {
-        output.push(bracket.team);
-    }
-    return output;
-}
-
-function GetAllSecondRoundTeams(bracket: TreeNode): Team[] {
-    let output: Team[] = new Array<Team>();
-    if (bracket.left.left) {
-        output = output.concat(GetAllSecondRoundTeams(bracket.left));
-    }
-    if (bracket.right.right) {
-        output = output.concat(GetAllSecondRoundTeams(bracket.right));
-    }
-    if (!bracket.left.left && !bracket.right.right) {
-        output.push(bracket.team);
-    }
-    return output;
-}
-
-function GetSweetSixteenTeams(bracket: TreeNode): Team[] {
-    let output: Team[] = new Array<Team>();
-    if (bracket.left.left.left) {
-        output = output.concat(GetSweetSixteenTeams(bracket.left));
-    }
-    if (bracket.right.right.right) {
-        output = output.concat(GetSweetSixteenTeams(bracket.right));
-    }
-    if (!bracket.left.left.left && !bracket.right.right.right) {
-        output.push(bracket.team);
-    }
-    return output;
-}
-
-function GetEliteEightTeams(bracket: TreeNode): Team[] {
-    let output: Team[] = new Array<Team>();
-    if (bracket.left.left.left.left) {
-        output = output.concat(GetEliteEightTeams(bracket.left));
-    }
-    if (bracket.right.right.right.right) {
-        output = output.concat(GetEliteEightTeams(bracket.right));
-    }
-    if (!bracket.left.left.left.left && !bracket.right.right.right.right) {
-        output.push(bracket.team);
-    }
-    return output;
-}
-
-function GetFinalFourTeams(bracket: TreeNode): Team[] {
-    let output: Team[] = new Array<Team>();
-    if (bracket.left.left.left.left.left) {
-        output = output.concat(GetFinalFourTeams(bracket.left));
-    }
-    if (bracket.right.right.right.right.right) {
-        output = output.concat(GetFinalFourTeams(bracket.right));
-    }
-    if (!bracket.left.left.left.left.left && !bracket.right.right.right.right.right) {
-        output.push(bracket.team);
-    }
-    return output;
-}
-
-function GetChampionshipTeams(bracket: TreeNode): Team[] {
-    let output: Team[] = new Array<Team>();
-    output.push(bracket.left.team);
-    output.push(bracket.right.team);
-    return output;
-}
-
-function GetChampion(bracket: TreeNode): Team[] {
-    let output: Team[] = new Array<Team>();
-    output.push(bracket.team);
-    return output;
-}
-
 function SimulateAndGiveResult(data, algorith): Result {
     return GiveResults(SimulateBracket(data, algorith));
 }
 
-function SimulateBracket(data, algorith): TreeNode {
-    var bracketRoot: TreeNode = CreateBlankBracket(data);
-    var filledOutUserBracket: TreeNode = FillOutBracket(bracketRoot, algorith);
-    var completeCorrectBracket: TreeNode = CreateCompleteCorrectBracket(data);
-    var userBracketWithResults: TreeNode = AddResultsToUserBracket(completeCorrectBracket, filledOutUserBracket);
+function SimulateBracket(data, algorith): Bracket {
+    var bracketRoot: Bracket = CreateBlankBracket(data);
+    var filledOutUserBracket: Bracket = FillOutBracket(bracketRoot, algorith);
+    var completeCorrectBracket: Bracket = CreateCompleteCorrectBracket(data);
+    var userBracketWithResults: Bracket = AddResultsToUserBracket(completeCorrectBracket, filledOutUserBracket);
     return userBracketWithResults;
 }
 
@@ -318,7 +197,7 @@ function PointPerGame(result1: Result, result2: Result): Result {
     }
 }
 
-function GiveResults(bracket: TreeNode, result?: Result): Result {
+function GiveResults(bracket: Bracket, result?: Result): Result {
     let output = new Result();
     if (result) {
         output = result;
@@ -354,7 +233,7 @@ function GiveResults(bracket: TreeNode, result?: Result): Result {
     return output;
 }
 
-function AddResultsToUserBracket(correctBracket: TreeNode, userBracket: TreeNode): TreeNode {
+function AddResultsToUserBracket(correctBracket: Bracket, userBracket: Bracket): Bracket {
     if (userBracket.left.left && userBracket.left.team.correct == null) {
         userBracket.left = AddResultsToUserBracket(correctBracket.left, userBracket.left);
     }
@@ -369,114 +248,13 @@ function AddResultsToUserBracket(correctBracket: TreeNode, userBracket: TreeNode
     return userBracket;
 }
 
-function CreateCompleteCorrectBracket(data): TreeNode {
-    var blankBracket: TreeNode = CreateBlankBracket(data);
-    var finishedBracket: TreeNode = FillOutCorrectBracket(blankBracket, data);
+function CreateCompleteCorrectBracket(data): Bracket {
+    var blankBracket: Bracket = CreateBlankBracket(data);
+    var finishedBracket: Bracket = FillOutCorrectBracket(blankBracket, data);
     return finishedBracket;
 }
 
-function FillOutCorrectBracket(node: TreeNode, data): TreeNode {
-    if (!node.left.team) {
-        node.left.team = FillOutCorrectBracket(node.left, data).team;
-    }
-    if (!node.right.team) {
-        node.right.team = FillOutCorrectBracket(node.right, data).team;
-    }
-
-    //Not good. Should find a better way soon
-    if (node.depth == 0) {//Championship
-        if (node.left.team.teamName == data.FF.winners.championship) {
-            node.team = node.left.team;
-        } else if (node.right.team.teamName == data.FF.winners.championship) {
-            node.team = node.right.team;
-        } else {
-            throw new Error("Championship team names did not match data winner: " + node.left.team.teamName + node.right.team.teamName + data.FF.winners.championship);
-        }
-    } else if (node.depth == 1) {//FinalFour
-        if (node.left.team.teamName == data.FF.winners.finalFour[0] || node.left.team.teamName == data.FF.winners.finalFour[1]) {
-            node.team = node.left.team;
-        } else if (node.right.team.teamName == data.FF.winners.finalFour[0] || node.right.team.teamName == data.FF.winners.finalFour[1]) {
-            node.team = node.right.team;
-        } else {
-            throw new Error("Final Four team names did not match data winner: " + node.left.team.teamName + node.right.team.teamName + data.FF.winners.finalFour);
-        }
-    } else if (node.depth == 2) {//EliteEight
-        for (let i = 0; i < data.Regions.length; i++) {
-            if (node.left.team.region == data.Regions[i].regionName) {
-                if (node.left.team.seed == data.Regions[i].winners.fourthRound) {
-                    node.team = node.left.team;
-                    i = data.Regions.length + 1;
-                } else if (node.right.team.seed == data.Regions[i].winners.fourthRound) {
-                    node.team = node.right.team;
-                    i = data.Regions.length + 1;
-                } else {
-                    throw new Error("Elite Eight seeds didn't match up properly" + node.left.team.seed + " " + node.right.team.seed + " " + data.Regions[i].winners.fourthRound);
-                }
-            }
-        }
-        if (!node.team) {
-            throw new Error("Elite Eight no team added");
-        }
-    } else if (node.depth >= 3) {//Sweet Sixteen - 1st round
-        let regionWinners;
-        for (let i = 0; i < data.Regions.length; i++) {
-            if (node.left.team.region == data.Regions[i].regionName) {
-                if (node.depth == 3) {
-                    regionWinners = data.Regions[i].winners.thirdRound;
-                } else if (node.depth == 4) {
-                    regionWinners = data.Regions[i].winners.secondRound;
-                } else if (node.depth == 5) {
-                    regionWinners = data.Regions[i].winners.firstRound;
-                }
-                for (let j = 0; j < regionWinners.length; j++) {
-                    if (node.left.team.seed == regionWinners[j]) {
-                        node.team = node.left.team;
-                        j = regionWinners.length + 1;
-                        i = data.Regions.length + 1;
-                    } else if (node.right.team.seed == regionWinners[j]) {
-                        node.team = node.right.team;
-                        j = regionWinners.length + 1;
-                        i = data.Regions.length + 1;
-                    }
-                }
-                if (!node.team) {
-                    throw new Error("No team added: " + node.left.team + node.right.team + " Depth: " + node.depth);
-                }
-            }
-        }
-
-    }
-
-    return node;
-}
-
-function CreateBlankBracket(data?, depth?: number): TreeNode {
-    currentTeam = 0;
-    if (!depth) {
-        depth = 0;
-    }
-    if (!data) {
-        data = bracketData;
-    }
-    return CBB(data, depth);
-}
-
-function CBB(data, depth: number): TreeNode {
-    let root = new TreeNode(depth);
-    if (depth < 6) {
-        root.left = CBB(data, depth + 1);
-        root.left.parent = root;
-        root.right = CBB(data, depth + 1);
-        root.right.parent = root;
-    } else {
-        root.team = new Team(seedOrder[(currentTeam) % 16], data.Regions[Math.floor(currentTeam / 16)].teams[seedOrder[(currentTeam) % 16] - 1]);
-        root.team.region = data.Regions[Math.floor(currentTeam / 16)].regionName;
-        currentTeam++;
-    }
-    return root;
-}
-
-function FillOutBracket(node: TreeNode, algorith): TreeNode {
+function FillOutBracket(node: Bracket, algorith): Bracket {
     if (!node.left.team) {
         node.left.team = _.cloneDeep(FillOutBracket(node.left, algorith).team);
     }
