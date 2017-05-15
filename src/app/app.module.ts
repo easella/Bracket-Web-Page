@@ -1,3 +1,4 @@
+import { TeamComponent } from './team.component';
 
 import { BracketComponent } from './bracket.component';
 import { NgModule } from '@angular/core';
@@ -10,7 +11,8 @@ import { HttpModule } from "@angular/http";
     imports: [BrowserModule, HttpModule],
     declarations: [
         AppComponent,
-        BracketComponent
+        BracketComponent,
+        TeamComponent
     ],
     bootstrap: [AppComponent]
 })

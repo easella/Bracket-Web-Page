@@ -1,0 +1,19 @@
+.game-correct {
+    /*background-color: green;*/
+}
+
+.game-incorrect {
+    /*background-color: red;*/
+}
+
+.game-top {
+    border-bottom:1px solid #aaa;
+}
+
+.game-bottom {
+    border-top:1px solid #aaa;
+}
+
+.game {
+    margin: 8px 0px;
+}

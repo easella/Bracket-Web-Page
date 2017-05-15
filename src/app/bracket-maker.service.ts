@@ -15,7 +15,13 @@ export class BracketMakerService {
         return this.CBB(data, 0);
     }
 
-    FillOutCorrectBracket(node: Bracket, data: any): Bracket {
+    CreateCompleteCorrectBracket(data: any): Bracket {
+        let blankBracket: Bracket = this.CreateBlankBracket(data);
+        let finishedBracket: Bracket = this.FillOutCorrectBracket(blankBracket, data);
+        return finishedBracket;
+    }
+
+    private FillOutCorrectBracket(node: Bracket, data: any): Bracket {
         if (!node.left.team) {
             node.left.team = this.FillOutCorrectBracket(node.left, data).team;
         }

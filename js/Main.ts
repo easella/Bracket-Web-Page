@@ -71,38 +71,6 @@ function RemoveClass(classToRemove: string) {
     }
 }
 
-function SetBracketYear(input: string) {
-    if (input == "2015") {
-        bracketData = bracketData2015;
-    } else if (input == "2017") {
-        bracketData = bracketData2017;
-    } else {
-        console.log("Wrong Year Chosen");
-    }
-}
-
-function SetScoringSystem(input: string) {
-    if (input == "game") {
-        scoringSystemToUse = PointPerGame;
-    } else if (input == "round") {
-        scoringSystemToUse = PointPerRound;
-    } else {
-        console.log("Wrong Scoring System Used");
-    }
-}
-
-function SetAlgorithm(input: string) {
-    if (input == "historical") {
-        algorithmToUse = HistoricalData;
-    } else if (input == "log2") {
-        algorithmToUse = LogXSeedDifference;
-    } else if (input == "random") {
-        algorithmToUse = FlipACoin;
-    } else {
-        console.log("Algorithm chosen is wrong");
-    }
-}
-
 function AddBracketToDOM(bracket: Bracket) {
     let firstRoundTeams: Team[] = GetAllFirstRoundTeams(bracket);
     let secondRoundTeams: Team[] = GetAllSecondRoundTeams(bracket);
@@ -195,61 +163,4 @@ function PointPerGame(result1: Result, result2: Result): Result {
     } else {
         return result2;
     }
-}
-
-function GiveResults(bracket: Bracket, result?: Result): Result {
-    let output = new Result();
-    if (result) {
-        output = result;
-    }
-    if (bracket.left.left) {
-        output = GiveResults(bracket.left, output);
-    }
-    if (bracket.right.right) {
-        output = GiveResults(bracket.right, output);
-    }
-    if (bracket.team.correct) {
-        switch (bracket.depth) {
-            case 0:
-                output.collective[Result.championship]++;
-                break;
-            case 1:
-                output.collective[Result.finalFour]++;
-                break;
-            case 2:
-                output.collective[Result.eliteEight]++;
-                break;
-            case 3:
-                output.collective[Result.sweetSixteen]++;
-                break;
-            case 4:
-                output.collective[Result.secondRound]++;
-                break;
-            case 5:
-                output.collective[Result.firstRound]++;
-                break;
-        }
-    }
-    return output;
-}
-
-function AddResultsToUserBracket(correctBracket: Bracket, userBracket: Bracket): Bracket {
-    if (userBracket.left.left && userBracket.left.team.correct == null) {
-        userBracket.left = AddResultsToUserBracket(correctBracket.left, userBracket.left);
-    }
-    if (userBracket.right.right && userBracket.right.team.correct == null) {
-        userBracket.right = AddResultsToUserBracket(correctBracket.right, userBracket.right);
-    }
-    if (correctBracket.team.teamName == userBracket.team.teamName) {
-        userBracket.team.correct = true;
-    } else {
-        userBracket.team.correct = false;
-    }
-    return userBracket;
-}
-
-function CreateCompleteCorrectBracket(data): Bracket {
-    var blankBracket: Bracket = CreateBlankBracket(data);
-    var finishedBracket: Bracket = FillOutCorrectBracket(blankBracket, data);
-    return finishedBracket;
 }

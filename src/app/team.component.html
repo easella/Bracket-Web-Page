@@ -1,0 +1,4 @@
+<div *ngIf="team" class="game" [ngClass]="{'game-correct': team.correct, 'game-incorrect': !team.correct, 'game-top': index%2===0, 'game-bottom': index%2===1}">
+    <span>{{index}}</span>
+    <span>{{team.teamName}}</span>
+</div>

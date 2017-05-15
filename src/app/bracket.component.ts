@@ -12,7 +12,11 @@ import { Algorithm } from './algoritm.enum';
 @Component({
     selector: 'bracket',
     templateUrl: './bracket.component.html',
-    providers: [BracketMakerService, BracketInformationService, BracketDataService, BracketSimulatorService]
+    providers: [
+        BracketMakerService,
+        BracketInformationService,
+        BracketDataService,
+        BracketSimulatorService]
 })
 
 export class BracketComponent implements OnInit {
@@ -21,7 +25,7 @@ export class BracketComponent implements OnInit {
         private bracketInformationService: BracketInformationService,
         private bracketDataService: BracketDataService,
         private bracketSimulatorService: BracketSimulatorService,
-        private http: Http) { }
+        private http: Http){}
 
     bracketData2015: any;
     bracketData2017: any;
@@ -42,11 +46,10 @@ export class BracketComponent implements OnInit {
     }
 
     private setBracket():void {
-        let bracket = this.bracketMakerService.CreateBlankBracket(this.currentBracketDataInUse);
-        this.correctBracket = this.bracketMakerService.FillOutCorrectBracket(bracket, this.currentBracketDataInUse);
+        this.correctBracket = this.bracketMakerService.CreateCompleteCorrectBracket(this.currentBracketDataInUse);
         let bracket2 = this.bracketMakerService.CreateBlankBracket(this.currentBracketDataInUse);
         this.tempUserBracket = this.bracketSimulatorService.SimulateBracket(bracket2, Algorithm.historicalData);
         console.log(this.tempUserBracket);
-        this.teams = this.bracketInformationService.GetAllFirstRoundTeams(bracket);
+        this.teams = this.bracketInformationService.GetAllFirstRoundTeams(this.correctBracket);
     }
 }

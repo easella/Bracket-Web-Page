@@ -1,5 +1,4 @@
 <h3>Bracket Goes Here</h3>
-<div *ngFor="let team of teams">
-    <span>{{team.seed}}</span>
-    <span>{{team.teamName}}</span>
+<div *ngFor="let team of teams; let i = index">
+    <team [team]="team" [index]="i"></team>
 </div>
