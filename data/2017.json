@@ -2,30 +2,47 @@
     "Regions": [
         {
             "teams": [
-                    "Villanova",
-                    "Duke",
-                    "Baylor",
-                    "Florida",
-                    "Virginia",
-                    "SMU",
-                    "South Carolina",
-                    "Wisconsin",
-                    "Virginia Tech",
-                    "Marquette",
-                    "USC",
-                    "UNC Wilmington",
-                    "East Tennessee State",
-                    "New Mexico State",
-                    "Troy",
-                    "Mount St Mary's"
+                "Villanova",
+                "Duke",
+                "Baylor",
+                "Florida",
+                "Virginia",
+                "SMU",
+                "South Carolina",
+                "Wisconsin",
+                "Virginia Tech",
+                "Marquette",
+                "USC",
+                "UNC Wilmington",
+                "East Tennessee State",
+                "New Mexico State",
+                "Troy",
+                "Mount St Mary's"
+            ],
+            "winners": {
+                "firstRound": [
+                    1,
+                    8,
+                    5,
+                    4,
+                    11,
+                    3,
+                    7,
+                    2
                 ],
-                "winners": {
-                    "firstRound": [1,8,5,4,11,3,7,2],
-                    "secondRound": [8,4,3,7],
-                    "thirdRound": [4,7],
-                    "fourthRound": 7
-                },
-                "regionName": "East"
+                "secondRound": [
+                    8,
+                    4,
+                    3,
+                    7
+                ],
+                "thirdRound": [
+                    4,
+                    7
+                ],
+                "fourthRound": 7
+            },
+            "regionName": "East"
         },
         {
             "teams": [
@@ -33,23 +50,40 @@
                 "Arizona",
                 "Florida State",
                 "West Virginia",
-                    "Notre Dame",
-                    "Maryland",
-                    "Saint Mary's",
-                    "Northwestern",
-                    "Vanderbilt",
-                    "VCU",
-                    "Xavier",
-                    "Princeton",
-                    "Bucknell",
-                    "Florida Gulf Coast",
-                    "North Dakota",
-                    "South Dakota State"
+                "Notre Dame",
+                "Maryland",
+                "Saint Mary's",
+                "Northwestern",
+                "Vanderbilt",
+                "VCU",
+                "Xavier",
+                "Princeton",
+                "Bucknell",
+                "Florida Gulf Coast",
+                "North Dakota",
+                "South Dakota State"
             ],
             "winners": {
-                "firstRound": [1,8,5,4,11,3,7,2],
-                "secondRound": [1,4,11,2],
-                "thirdRound": [1,11],
+                "firstRound": [
+                    1,
+                    8,
+                    5,
+                    4,
+                    11,
+                    3,
+                    7,
+                    2
+                ],
+                "secondRound": [
+                    1,
+                    4,
+                    11,
+                    2
+                ],
+                "thirdRound": [
+                    1,
+                    11
+                ],
                 "fourthRound": 1
             },
             "regionName": "West"
@@ -57,26 +91,43 @@
         {
             "teams": [
                 "Kansas",
-                    "Louisville",
-                    "Oregon",
-                    "Purdue",
-                    "Iowa State",
-                    "Creighton",
-                    "Michigan",
-                    "Miami",
-                    "Michigan State",
-                    "Oklahoma State",
-                    "Rhode Island",
-                    "Nevada",
-                    "Vermont",
-                    "Iona",
-                    "Jacksonville State",
-                    "UC Davis"
+                "Louisville",
+                "Oregon",
+                "Purdue",
+                "Iowa State",
+                "Creighton",
+                "Michigan",
+                "Miami",
+                "Michigan State",
+                "Oklahoma State",
+                "Rhode Island",
+                "Nevada",
+                "Vermont",
+                "Iona",
+                "Jacksonville State",
+                "UC Davis"
             ],
             "winners": {
-                "firstRound": [1,9,5,4,11,3,7,2],
-                "secondRound": [1,4,3,7],
-                "thirdRound": [1,3],
+                "firstRound": [
+                    1,
+                    9,
+                    5,
+                    4,
+                    11,
+                    3,
+                    7,
+                    2
+                ],
+                "secondRound": [
+                    1,
+                    4,
+                    3,
+                    7
+                ],
+                "thirdRound": [
+                    1,
+                    3
+                ],
                 "fourthRound": 3
             },
             "regionName": "Midwest"
@@ -84,26 +135,43 @@
         {
             "teams": [
                 "North Carolina",
-                    "Kentucky",
-                    "UCLA",
-                    "Butler",
-                    "Minnesota",
-                    "Cincinnati",
-                    "Dayton",
-                    "Arkansas",
-                    "Seton Hall",
-                    "Wichita State",
-                    "Kansas State",
-                    "Middle Tennessee",
-                    "Winthrop",
-                    "Kent State",
-                    "Northern Kentucky",
-                    "Texas Southern"
+                "Kentucky",
+                "UCLA",
+                "Butler",
+                "Minnesota",
+                "Cincinnati",
+                "Dayton",
+                "Arkansas",
+                "Seton Hall",
+                "Wichita State",
+                "Kansas State",
+                "Middle Tennessee",
+                "Winthrop",
+                "Kent State",
+                "Northern Kentucky",
+                "Texas Southern"
             ],
             "winners": {
-                "firstRound": [1,8,12,4,6,3,10,2],
-                "secondRound": [1,4,3,2],
-                "thirdRound": [1,2],
+                "firstRound": [
+                    1,
+                    8,
+                    12,
+                    4,
+                    6,
+                    3,
+                    10,
+                    2
+                ],
+                "secondRound": [
+                    1,
+                    4,
+                    3,
+                    2
+                ],
+                "thirdRound": [
+                    1,
+                    2
+                ],
                 "fourthRound": 1
             },
             "regionName": "South"

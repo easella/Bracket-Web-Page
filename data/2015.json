@@ -20,9 +20,26 @@
                 "Hampton"
             ],
             "winners": {
-                "firstRound": [1,8,5,4,6,3,7,2],
-                "secondRound": [1,5,3,7],
-                "thirdRound": [1,3],
+                "firstRound": [
+                    1,
+                    8,
+                    5,
+                    4,
+                    6,
+                    3,
+                    7,
+                    2
+                ],
+                "secondRound": [
+                    1,
+                    5,
+                    3,
+                    7
+                ],
+                "thirdRound": [
+                    1,
+                    3
+                ],
                 "fourthRound": 1
             },
             "regionName": "Midwest"
@@ -47,9 +64,26 @@
                 "Coastal Carolina"
             ],
             "winners": {
-                "firstRound": [1,8,5,4,6,14,10,2],
-                "secondRound": [1,4,6,2],
-                "thirdRound": [1,2],
+                "firstRound": [
+                    1,
+                    8,
+                    5,
+                    4,
+                    6,
+                    14,
+                    10,
+                    2
+                ],
+                "secondRound": [
+                    1,
+                    4,
+                    6,
+                    2
+                ],
+                "thirdRound": [
+                    1,
+                    2
+                ],
                 "fourthRound": 1
             },
             "regionName": "West"
@@ -74,9 +108,26 @@
                 "Lafayette"
             ],
             "winners": {
-                "firstRound": [1,8,5,4,11,3,7,2],
-                "secondRound": [8,4,3,7],
-                "thirdRound": [4,7],
+                "firstRound": [
+                    1,
+                    8,
+                    5,
+                    4,
+                    11,
+                    3,
+                    7,
+                    2
+                ],
+                "secondRound": [
+                    8,
+                    4,
+                    3,
+                    7
+                ],
+                "thirdRound": [
+                    4,
+                    7
+                ],
                 "fourthRound": 7
             },
             "regionName": "East"
@@ -101,9 +152,26 @@
                 "Robert Morris"
             ],
             "winners": {
-                "firstRound": [1,8,5,4,11,14,7,2],
-                "secondRound": [1,5,11,2],
-                "thirdRound": [1,2],
+                "firstRound": [
+                    1,
+                    8,
+                    5,
+                    4,
+                    11,
+                    14,
+                    7,
+                    2
+                ],
+                "secondRound": [
+                    1,
+                    5,
+                    11,
+                    2
+                ],
+                "thirdRound": [
+                    1,
+                    2
+                ],
                 "fourthRound": 1
             },
             "regionName": "South"
