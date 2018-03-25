@@ -43,6 +43,7 @@ declare function require(name: string);
 var seedPerformance = require('../Data/seedPerformance.json');
 var bracketData2015 = require('../Data/2015.json');
 var bracketData2017 = require('../Data/2017.json');
+var bracketData2018 = require('../Data/2018.json');
 var _ = require('lodash');
 var currentTeam = 0;
 var seedOrder: number[] = [1, 16, 8, 9, 5, 12, 4, 13, 6, 11, 3, 14, 7, 10, 2, 15];
@@ -113,6 +114,8 @@ function SetBracketYear(input: string) {
         bracketData = bracketData2015;
     } else if (input == "2017") {
         bracketData = bracketData2017;
+    } else if (input == "2018") {
+        bracketData = bracketData2018;
     } else {
         console.log("Wrong Year Chosen");
     }
