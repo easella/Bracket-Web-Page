@@ -1,4 +1,4 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 module.exports={
     "Regions": [
         {
@@ -21,9 +21,26 @@ module.exports={
                 "Hampton"
             ],
             "winners": {
-                "firstRound": [1,8,5,4,6,3,7,2],
-                "secondRound": [1,5,3,7],
-                "thirdRound": [1,3],
+                "firstRound": [
+                    1,
+                    8,
+                    5,
+                    4,
+                    6,
+                    3,
+                    7,
+                    2
+                ],
+                "secondRound": [
+                    1,
+                    5,
+                    3,
+                    7
+                ],
+                "thirdRound": [
+                    1,
+                    3
+                ],
                 "fourthRound": 1
             },
             "regionName": "Midwest"
@@ -48,9 +65,26 @@ module.exports={
                 "Coastal Carolina"
             ],
             "winners": {
-                "firstRound": [1,8,5,4,6,14,10,2],
-                "secondRound": [1,4,6,2],
-                "thirdRound": [1,2],
+                "firstRound": [
+                    1,
+                    8,
+                    5,
+                    4,
+                    6,
+                    14,
+                    10,
+                    2
+                ],
+                "secondRound": [
+                    1,
+                    4,
+                    6,
+                    2
+                ],
+                "thirdRound": [
+                    1,
+                    2
+                ],
                 "fourthRound": 1
             },
             "regionName": "West"
@@ -75,9 +109,26 @@ module.exports={
                 "Lafayette"
             ],
             "winners": {
-                "firstRound": [1,8,5,4,11,3,7,2],
-                "secondRound": [8,4,3,7],
-                "thirdRound": [4,7],
+                "firstRound": [
+                    1,
+                    8,
+                    5,
+                    4,
+                    11,
+                    3,
+                    7,
+                    2
+                ],
+                "secondRound": [
+                    8,
+                    4,
+                    3,
+                    7
+                ],
+                "thirdRound": [
+                    4,
+                    7
+                ],
                 "fourthRound": 7
             },
             "regionName": "East"
@@ -102,9 +153,26 @@ module.exports={
                 "Robert Morris"
             ],
             "winners": {
-                "firstRound": [1,8,5,4,11,14,7,2],
-                "secondRound": [1,5,11,2],
-                "thirdRound": [1,2],
+                "firstRound": [
+                    1,
+                    8,
+                    5,
+                    4,
+                    11,
+                    14,
+                    7,
+                    2
+                ],
+                "secondRound": [
+                    1,
+                    5,
+                    11,
+                    2
+                ],
+                "thirdRound": [
+                    1,
+                    2
+                ],
                 "fourthRound": 1
             },
             "regionName": "South"
@@ -125,30 +193,47 @@ module.exports={
     "Regions": [
         {
             "teams": [
-                    "Villanova",
-                    "Duke",
-                    "Baylor",
-                    "Florida",
-                    "Virginia",
-                    "SMU",
-                    "South Carolina",
-                    "Wisconsin",
-                    "Virginia Tech",
-                    "Marquette",
-                    "USC",
-                    "UNC Wilmington",
-                    "East Tennessee State",
-                    "New Mexico State",
-                    "Troy",
-                    "Mount St Mary's"
+                "Villanova",
+                "Duke",
+                "Baylor",
+                "Florida",
+                "Virginia",
+                "SMU",
+                "South Carolina",
+                "Wisconsin",
+                "Virginia Tech",
+                "Marquette",
+                "USC",
+                "UNC Wilmington",
+                "East Tennessee State",
+                "New Mexico State",
+                "Troy",
+                "Mount St Mary's"
+            ],
+            "winners": {
+                "firstRound": [
+                    1,
+                    8,
+                    5,
+                    4,
+                    11,
+                    3,
+                    7,
+                    2
                 ],
-                "winners": {
-                    "firstRound": [1,8,5,4,11,3,7,2],
-                    "secondRound": [8,4,3,7],
-                    "thirdRound": [4,7],
-                    "fourthRound": 7
-                },
-                "regionName": "East"
+                "secondRound": [
+                    8,
+                    4,
+                    3,
+                    7
+                ],
+                "thirdRound": [
+                    4,
+                    7
+                ],
+                "fourthRound": 7
+            },
+            "regionName": "East"
         },
         {
             "teams": [
@@ -156,23 +241,40 @@ module.exports={
                 "Arizona",
                 "Florida State",
                 "West Virginia",
-                    "Notre Dame",
-                    "Maryland",
-                    "Saint Mary's",
-                    "Northwestern",
-                    "Vanderbilt",
-                    "VCU",
-                    "Xavier",
-                    "Princeton",
-                    "Bucknell",
-                    "Florida Gulf Coast",
-                    "North Dakota",
-                    "South Dakota State"
+                "Notre Dame",
+                "Maryland",
+                "Saint Mary's",
+                "Northwestern",
+                "Vanderbilt",
+                "VCU",
+                "Xavier",
+                "Princeton",
+                "Bucknell",
+                "Florida Gulf Coast",
+                "North Dakota",
+                "South Dakota State"
             ],
             "winners": {
-                "firstRound": [1,8,5,4,11,3,7,2],
-                "secondRound": [1,4,11,2],
-                "thirdRound": [1,11],
+                "firstRound": [
+                    1,
+                    8,
+                    5,
+                    4,
+                    11,
+                    3,
+                    7,
+                    2
+                ],
+                "secondRound": [
+                    1,
+                    4,
+                    11,
+                    2
+                ],
+                "thirdRound": [
+                    1,
+                    11
+                ],
                 "fourthRound": 1
             },
             "regionName": "West"
@@ -180,26 +282,43 @@ module.exports={
         {
             "teams": [
                 "Kansas",
-                    "Louisville",
-                    "Oregon",
-                    "Purdue",
-                    "Iowa State",
-                    "Creighton",
-                    "Michigan",
-                    "Miami",
-                    "Michigan State",
-                    "Oklahoma State",
-                    "Rhode Island",
-                    "Nevada",
-                    "Vermont",
-                    "Iona",
-                    "Jacksonville State",
-                    "UC Davis"
+                "Louisville",
+                "Oregon",
+                "Purdue",
+                "Iowa State",
+                "Creighton",
+                "Michigan",
+                "Miami",
+                "Michigan State",
+                "Oklahoma State",
+                "Rhode Island",
+                "Nevada",
+                "Vermont",
+                "Iona",
+                "Jacksonville State",
+                "UC Davis"
             ],
             "winners": {
-                "firstRound": [1,9,5,4,11,3,7,2],
-                "secondRound": [1,4,3,7],
-                "thirdRound": [1,3],
+                "firstRound": [
+                    1,
+                    9,
+                    5,
+                    4,
+                    11,
+                    3,
+                    7,
+                    2
+                ],
+                "secondRound": [
+                    1,
+                    4,
+                    3,
+                    7
+                ],
+                "thirdRound": [
+                    1,
+                    3
+                ],
                 "fourthRound": 3
             },
             "regionName": "Midwest"
@@ -207,26 +326,43 @@ module.exports={
         {
             "teams": [
                 "North Carolina",
-                    "Kentucky",
-                    "UCLA",
-                    "Butler",
-                    "Minnesota",
-                    "Cincinnati",
-                    "Dayton",
-                    "Arkansas",
-                    "Seton Hall",
-                    "Wichita State",
-                    "Kansas State",
-                    "Middle Tennessee",
-                    "Winthrop",
-                    "Kent State",
-                    "Northern Kentucky",
-                    "Texas Southern"
+                "Kentucky",
+                "UCLA",
+                "Butler",
+                "Minnesota",
+                "Cincinnati",
+                "Dayton",
+                "Arkansas",
+                "Seton Hall",
+                "Wichita State",
+                "Kansas State",
+                "Middle Tennessee",
+                "Winthrop",
+                "Kent State",
+                "Northern Kentucky",
+                "Texas Southern"
             ],
             "winners": {
-                "firstRound": [1,8,12,4,6,3,10,2],
-                "secondRound": [1,4,3,2],
-                "thirdRound": [1,2],
+                "firstRound": [
+                    1,
+                    8,
+                    12,
+                    4,
+                    6,
+                    3,
+                    10,
+                    2
+                ],
+                "secondRound": [
+                    1,
+                    4,
+                    3,
+                    2
+                ],
+                "thirdRound": [
+                    1,
+                    2
+                ],
                 "fourthRound": 1
             },
             "regionName": "South"
@@ -243,6 +379,196 @@ module.exports={
     }
 }
 },{}],3:[function(require,module,exports){
+module.exports={
+    "Regions": [
+        {
+            "teams": [
+                "Virginia",
+                "Cincinnati",
+                "Tennessee",
+                "Arizona",
+                "Kentucky",
+                "Miami",
+                "Nevada",
+                "Creighton",
+                "Kansas State",
+                "Texas",
+                "Loyola-Chicago",
+                "Davidson",
+                "Buffalo",
+                "Wright State",
+                "Georgia State",
+                "UMBC"
+            ],
+            "winners": {
+                "firstRound": [
+                    16,
+                    9,
+                    5,
+                    13,
+                    11,
+                    3,
+                    7,
+                    2
+                ],
+                "secondRound": [
+                    9,
+                    5,
+                    11,
+                    7
+                ],
+                "thirdRound": [
+                    9,
+                    11
+                ],
+                "fourthRound": 11
+            },
+            "regionName": "South"
+        },
+        {
+            "teams": [
+                "Xavier",
+                "North Carolina",
+                "Michigan",
+                "Gonzaga",
+                "Ohio State",
+                "Houston",
+                "Texas A&M",
+                "Missouri",
+                "Florida State",
+                "Providence",
+                "San Diego State",
+                "South Dakota State",
+                "UNC Greensboro",
+                "Montana",
+                "Lipscomb",
+                "Texas Southern"
+            ],
+            "winners": {
+                "firstRound": [
+                    1,
+                    9,
+                    5,
+                    4,
+                    6,
+                    3,
+                    7,
+                    2
+                ],
+                "secondRound": [
+                    9,
+                    4,
+                    3,
+                    7
+                ],
+                "thirdRound": [
+                    9,
+                    3
+                ],
+                "fourthRound": 3
+            },
+            "regionName": "West"
+        },
+        {
+            "teams": [
+                "Villanova",
+                "Purdue",
+                "Texas Tech",
+                "Wichita State",
+                "West Virginia",
+                "Florida",
+                "Arkansas",
+                "Virginia Tech",
+                "Alabama",
+                "Butler",
+                "St Bonaventure",
+                "Murray State",
+                "Marshall",
+                "SF Austin",
+                "CS Fullerton",
+                "Radford"
+            ],
+            "winners": {
+                "firstRound": [
+                    1,
+                    9,
+                    5,
+                    13,
+                    6,
+                    3,
+                    10,
+                    2
+                ],
+                "secondRound": [
+                    1,
+                    5,
+                    3,
+                    2
+                ],
+                "thirdRound": [
+                    1,
+                    3
+                ],
+                "fourthRound": 1
+            },
+            "regionName": "East"
+        },
+        {
+            "teams": [
+                "Kansas",
+                "Duke",
+                "Michigan State",
+                "Auburn",
+                "Clemson",
+                "TCU",
+                "Rhode Island",
+                "Seton Hall",
+                "NC State",
+                "Oklahoma",
+                "Syracuse",
+                "New Mexico State",
+                "Charleston",
+                "Bucknell",
+                "Iona",
+                "Pennsylvania"
+            ],
+            "winners": {
+                "firstRound": [
+                    1,
+                    8,
+                    5,
+                    4,
+                    11,
+                    3,
+                    7,
+                    2
+                ],
+                "secondRound": [
+                    1,
+                    5,
+                    11,
+                    2
+                ],
+                "thirdRound": [
+                    1,
+                    2
+                ],
+                "fourthRound": 1
+            },
+            "regionName": "Midwest"
+        }
+    ],
+    "FF": {
+        "winners": {
+            "finalFour": [
+                "Michigan",
+                "Villanova"
+            ],
+            "championship": "Villanova"
+        }
+    }
+}
+},{}],4:[function(require,module,exports){
 module.exports={
     "performances": [
         {
@@ -311,28 +637,28 @@ module.exports={
         }
     ]
 }
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 'use strict';
-var Team = (function () {
+var Team = /** @class */ (function () {
     function Team(seed, teamName) {
         this.seed = seed;
         this.teamName = teamName;
     }
     return Team;
 }());
-var Result = (function () {
+var Result = /** @class */ (function () {
     function Result() {
         this.collective = [0, 0, 0, 0, 0, 0];
     }
+    Result.firstRound = 0;
+    Result.secondRound = 1;
+    Result.sweetSixteen = 2;
+    Result.eliteEight = 3;
+    Result.finalFour = 4;
+    Result.championship = 5;
     return Result;
 }());
-Result.firstRound = 0;
-Result.secondRound = 1;
-Result.sweetSixteen = 2;
-Result.eliteEight = 3;
-Result.finalFour = 4;
-Result.championship = 5;
-var TreeNode = (function () {
+var TreeNode = /** @class */ (function () {
     function TreeNode(depth, parent) {
         this.depth = depth;
         if (parent) {
@@ -347,6 +673,7 @@ var TreeNode = (function () {
 var seedPerformance = require('../Data/seedPerformance.json');
 var bracketData2015 = require('../Data/2015.json');
 var bracketData2017 = require('../Data/2017.json');
+var bracketData2018 = require('../Data/2018.json');
 var _ = require('lodash');
 var currentTeam = 0;
 var seedOrder = [1, 16, 8, 9, 5, 12, 4, 13, 6, 11, 3, 14, 7, 10, 2, 15];
@@ -411,6 +738,9 @@ function SetBracketYear(input) {
     }
     else if (input == "2017") {
         bracketData = bracketData2017;
+    }
+    else if (input == "2018") {
+        bracketData = bracketData2018;
     }
     else {
         console.log("Wrong Year Chosen");
@@ -670,7 +1000,7 @@ function FillOutCorrectBracket(node, data) {
         node.right.team = FillOutCorrectBracket(node.right, data).team;
     }
     //Not good. Should find a better way soon
-    if (node.depth == 0) {
+    if (node.depth == 0) { //Championship
         if (node.left.team.teamName == data.FF.winners.championship) {
             node.team = node.left.team;
         }
@@ -681,7 +1011,7 @@ function FillOutCorrectBracket(node, data) {
             throw new Error("Championship team names did not match data winner: " + node.left.team.teamName + node.right.team.teamName + data.FF.winners.championship);
         }
     }
-    else if (node.depth == 1) {
+    else if (node.depth == 1) { //FinalFour
         if (node.left.team.teamName == data.FF.winners.finalFour[0] || node.left.team.teamName == data.FF.winners.finalFour[1]) {
             node.team = node.left.team;
         }
@@ -692,7 +1022,7 @@ function FillOutCorrectBracket(node, data) {
             throw new Error("Final Four team names did not match data winner: " + node.left.team.teamName + node.right.team.teamName + data.FF.winners.finalFour);
         }
     }
-    else if (node.depth == 2) {
+    else if (node.depth == 2) { //EliteEight
         for (var i = 0; i < data.Regions.length; i++) {
             if (node.left.team.region == data.Regions[i].regionName) {
                 if (node.left.team.seed == data.Regions[i].winners.fourthRound) {
@@ -712,7 +1042,7 @@ function FillOutCorrectBracket(node, data) {
             throw new Error("Elite Eight no team added");
         }
     }
-    else if (node.depth >= 3) {
+    else if (node.depth >= 3) { //Sweet Sixteen - 1st round
         var regionWinners = void 0;
         for (var i = 0; i < data.Regions.length; i++) {
             if (node.left.team.region == data.Regions[i].regionName) {
@@ -852,7 +1182,7 @@ function FlipACoin(team1, team2) {
     }
 }
 
-},{"../Data/2015.json":1,"../Data/2017.json":2,"../Data/seedPerformance.json":3,"lodash":5}],5:[function(require,module,exports){
+},{"../Data/2015.json":1,"../Data/2017.json":2,"../Data/2018.json":3,"../Data/seedPerformance.json":4,"lodash":6}],6:[function(require,module,exports){
 (function (global){
 /**
  * @license
@@ -868,7 +1198,7 @@ function FlipACoin(team1, team2) {
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '4.17.4';
+  var VERSION = '4.17.5';
 
   /** Used as the size to enable large array optimizations. */
   var LARGE_ARRAY_SIZE = 200;
@@ -999,7 +1329,6 @@ function FlipACoin(team1, team2) {
   /** Used to match property names within property paths. */
   var reIsDeepProp = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/,
       reIsPlainProp = /^\w*$/,
-      reLeadingDot = /^\./,
       rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|$))/g;
 
   /**
@@ -1099,8 +1428,8 @@ function FlipACoin(team1, team2) {
       reOptMod = rsModifier + '?',
       rsOptVar = '[' + rsVarRange + ']?',
       rsOptJoin = '(?:' + rsZWJ + '(?:' + [rsNonAstral, rsRegional, rsSurrPair].join('|') + ')' + rsOptVar + reOptMod + ')*',
-      rsOrdLower = '\\d*(?:(?:1st|2nd|3rd|(?![123])\\dth)\\b)',
-      rsOrdUpper = '\\d*(?:(?:1ST|2ND|3RD|(?![123])\\dTH)\\b)',
+      rsOrdLower = '\\d*(?:1st|2nd|3rd|(?![123])\\dth)(?=\\b|[A-Z_])',
+      rsOrdUpper = '\\d*(?:1ST|2ND|3RD|(?![123])\\dTH)(?=\\b|[a-z_])',
       rsSeq = rsOptVar + reOptMod + rsOptJoin,
       rsEmoji = '(?:' + [rsDingbat, rsRegional, rsSurrPair].join('|') + ')' + rsSeq,
       rsSymbol = '(?:' + [rsNonAstral + rsCombo + '?', rsCombo, rsRegional, rsSurrPair, rsAstral].join('|') + ')';
@@ -1306,34 +1635,6 @@ function FlipACoin(team1, team2) {
       nodeIsTypedArray = nodeUtil && nodeUtil.isTypedArray;
 
   /*--------------------------------------------------------------------------*/
-
-  /**
-   * Adds the key-value `pair` to `map`.
-   *
-   * @private
-   * @param {Object} map The map to modify.
-   * @param {Array} pair The key-value pair to add.
-   * @returns {Object} Returns `map`.
-   */
-  function addMapEntry(map, pair) {
-    // Don't return `map.set` because it's not chainable in IE 11.
-    map.set(pair[0], pair[1]);
-    return map;
-  }
-
-  /**
-   * Adds `value` to `set`.
-   *
-   * @private
-   * @param {Object} set The set to modify.
-   * @param {*} value The value to add.
-   * @returns {Object} Returns `set`.
-   */
-  function addSetEntry(set, value) {
-    // Don't return `set.add` because it's not chainable in IE 11.
-    set.add(value);
-    return set;
-  }
 
   /**
    * A faster alternative to `Function#apply`, this function invokes `func`
@@ -2099,6 +2400,20 @@ function FlipACoin(team1, team2) {
       }
     }
     return result;
+  }
+
+  /**
+   * Gets the value at `key`, unless `key` is "__proto__".
+   *
+   * @private
+   * @param {Object} object The object to query.
+   * @param {string} key The key of the property to get.
+   * @returns {*} Returns the property value.
+   */
+  function safeGet(object, key) {
+    return key == '__proto__'
+      ? undefined
+      : object[key];
   }
 
   /**
@@ -3533,7 +3848,7 @@ function FlipACoin(team1, team2) {
           if (!cloneableTags[tag]) {
             return object ? value : {};
           }
-          result = initCloneByTag(value, tag, baseClone, isDeep);
+          result = initCloneByTag(value, tag, isDeep);
         }
       }
       // Check for circular references and return its corresponding clone.
@@ -3543,6 +3858,22 @@ function FlipACoin(team1, team2) {
         return stacked;
       }
       stack.set(value, result);
+
+      if (isSet(value)) {
+        value.forEach(function(subValue) {
+          result.add(baseClone(subValue, bitmask, customizer, subValue, value, stack));
+        });
+
+        return result;
+      }
+
+      if (isMap(value)) {
+        value.forEach(function(subValue, key) {
+          result.set(key, baseClone(subValue, bitmask, customizer, key, value, stack));
+        });
+
+        return result;
+      }
 
       var keysFunc = isFull
         ? (isFlat ? getAllKeysIn : getAllKeys)
@@ -4471,7 +4802,7 @@ function FlipACoin(team1, team2) {
         }
         else {
           var newValue = customizer
-            ? customizer(object[key], srcValue, (key + ''), object, source, stack)
+            ? customizer(safeGet(object, key), srcValue, (key + ''), object, source, stack)
             : undefined;
 
           if (newValue === undefined) {
@@ -4498,8 +4829,8 @@ function FlipACoin(team1, team2) {
      *  counterparts.
      */
     function baseMergeDeep(object, source, key, srcIndex, mergeFunc, customizer, stack) {
-      var objValue = object[key],
-          srcValue = source[key],
+      var objValue = safeGet(object, key),
+          srcValue = safeGet(source, key),
           stacked = stack.get(srcValue);
 
       if (stacked) {
@@ -5408,20 +5739,6 @@ function FlipACoin(team1, team2) {
     }
 
     /**
-     * Creates a clone of `map`.
-     *
-     * @private
-     * @param {Object} map The map to clone.
-     * @param {Function} cloneFunc The function to clone values.
-     * @param {boolean} [isDeep] Specify a deep clone.
-     * @returns {Object} Returns the cloned map.
-     */
-    function cloneMap(map, isDeep, cloneFunc) {
-      var array = isDeep ? cloneFunc(mapToArray(map), CLONE_DEEP_FLAG) : mapToArray(map);
-      return arrayReduce(array, addMapEntry, new map.constructor);
-    }
-
-    /**
      * Creates a clone of `regexp`.
      *
      * @private
@@ -5432,20 +5749,6 @@ function FlipACoin(team1, team2) {
       var result = new regexp.constructor(regexp.source, reFlags.exec(regexp));
       result.lastIndex = regexp.lastIndex;
       return result;
-    }
-
-    /**
-     * Creates a clone of `set`.
-     *
-     * @private
-     * @param {Object} set The set to clone.
-     * @param {Function} cloneFunc The function to clone values.
-     * @param {boolean} [isDeep] Specify a deep clone.
-     * @returns {Object} Returns the cloned set.
-     */
-    function cloneSet(set, isDeep, cloneFunc) {
-      var array = isDeep ? cloneFunc(setToArray(set), CLONE_DEEP_FLAG) : setToArray(set);
-      return arrayReduce(array, addSetEntry, new set.constructor);
     }
 
     /**
@@ -7042,7 +7345,7 @@ function FlipACoin(team1, team2) {
      */
     function initCloneArray(array) {
       var length = array.length,
-          result = array.constructor(length);
+          result = new array.constructor(length);
 
       // Add properties assigned by `RegExp#exec`.
       if (length && typeof array[0] == 'string' && hasOwnProperty.call(array, 'index')) {
@@ -7069,16 +7372,15 @@ function FlipACoin(team1, team2) {
      * Initializes an object clone based on its `toStringTag`.
      *
      * **Note:** This function only supports cloning values with tags of
-     * `Boolean`, `Date`, `Error`, `Number`, `RegExp`, or `String`.
+     * `Boolean`, `Date`, `Error`, `Map`, `Number`, `RegExp`, `Set`, or `String`.
      *
      * @private
      * @param {Object} object The object to clone.
      * @param {string} tag The `toStringTag` of the object to clone.
-     * @param {Function} cloneFunc The function to clone values.
      * @param {boolean} [isDeep] Specify a deep clone.
      * @returns {Object} Returns the initialized clone.
      */
-    function initCloneByTag(object, tag, cloneFunc, isDeep) {
+    function initCloneByTag(object, tag, isDeep) {
       var Ctor = object.constructor;
       switch (tag) {
         case arrayBufferTag:
@@ -7097,7 +7399,7 @@ function FlipACoin(team1, team2) {
           return cloneTypedArray(object, isDeep);
 
         case mapTag:
-          return cloneMap(object, isDeep, cloneFunc);
+          return new Ctor;
 
         case numberTag:
         case stringTag:
@@ -7107,7 +7409,7 @@ function FlipACoin(team1, team2) {
           return cloneRegExp(object);
 
         case setTag:
-          return cloneSet(object, isDeep, cloneFunc);
+          return new Ctor;
 
         case symbolTag:
           return cloneSymbol(object);
@@ -7154,10 +7456,13 @@ function FlipACoin(team1, team2) {
      * @returns {boolean} Returns `true` if `value` is a valid index, else `false`.
      */
     function isIndex(value, length) {
+      var type = typeof value;
       length = length == null ? MAX_SAFE_INTEGER : length;
+
       return !!length &&
-        (typeof value == 'number' || reIsUint.test(value)) &&
-        (value > -1 && value % 1 == 0 && value < length);
+        (type == 'number' ||
+          (type != 'symbol' && reIsUint.test(value))) &&
+            (value > -1 && value % 1 == 0 && value < length);
     }
 
     /**
@@ -7607,11 +7912,11 @@ function FlipACoin(team1, team2) {
      */
     var stringToPath = memoizeCapped(function(string) {
       var result = [];
-      if (reLeadingDot.test(string)) {
+      if (string.charCodeAt(0) === 46 /* . */) {
         result.push('');
       }
-      string.replace(rePropName, function(match, number, quote, string) {
-        result.push(quote ? string.replace(reEscapeChar, '$1') : (number || match));
+      string.replace(rePropName, function(match, number, quote, subString) {
+        result.push(quote ? subString.replace(reEscapeChar, '$1') : (number || match));
       });
       return result;
     });
@@ -11219,9 +11524,11 @@ function FlipACoin(team1, team2) {
       function remainingWait(time) {
         var timeSinceLastCall = time - lastCallTime,
             timeSinceLastInvoke = time - lastInvokeTime,
-            result = wait - timeSinceLastCall;
+            timeWaiting = wait - timeSinceLastCall;
 
-        return maxing ? nativeMin(result, maxWait - timeSinceLastInvoke) : result;
+        return maxing
+          ? nativeMin(timeWaiting, maxWait - timeSinceLastInvoke)
+          : timeWaiting;
       }
 
       function shouldInvoke(time) {
@@ -13653,9 +13960,35 @@ function FlipACoin(team1, team2) {
      * _.defaults({ 'a': 1 }, { 'b': 2 }, { 'a': 3 });
      * // => { 'a': 1, 'b': 2 }
      */
-    var defaults = baseRest(function(args) {
-      args.push(undefined, customDefaultsAssignIn);
-      return apply(assignInWith, undefined, args);
+    var defaults = baseRest(function(object, sources) {
+      object = Object(object);
+
+      var index = -1;
+      var length = sources.length;
+      var guard = length > 2 ? sources[2] : undefined;
+
+      if (guard && isIterateeCall(sources[0], sources[1], guard)) {
+        length = 1;
+      }
+
+      while (++index < length) {
+        var source = sources[index];
+        var props = keysIn(source);
+        var propsIndex = -1;
+        var propsLength = props.length;
+
+        while (++propsIndex < propsLength) {
+          var key = props[propsIndex];
+          var value = object[key];
+
+          if (value === undefined ||
+              (eq(value, objectProto[key]) && !hasOwnProperty.call(object, key))) {
+            object[key] = source[key];
+          }
+        }
+      }
+
+      return object;
     });
 
     /**
@@ -14052,6 +14385,11 @@ function FlipACoin(team1, team2) {
      * // => { '1': 'c', '2': 'b' }
      */
     var invert = createInverter(function(result, value, key) {
+      if (value != null &&
+          typeof value.toString != 'function') {
+        value = nativeObjectToString.call(value);
+      }
+
       result[value] = key;
     }, constant(identity));
 
@@ -14082,6 +14420,11 @@ function FlipACoin(team1, team2) {
      * // => { 'group1': ['a', 'c'], 'group2': ['b'] }
      */
     var invertBy = createInverter(function(result, value, key) {
+      if (value != null &&
+          typeof value.toString != 'function') {
+        value = nativeObjectToString.call(value);
+      }
+
       if (hasOwnProperty.call(result, value)) {
         result[value].push(key);
       } else {
@@ -17940,4 +18283,4 @@ function FlipACoin(team1, team2) {
 }.call(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}]},{},[4]);
+},{}]},{},[5]);
