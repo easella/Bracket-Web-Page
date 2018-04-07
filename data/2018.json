@@ -172,7 +172,7 @@
                     1,
                     2
                 ],
-                "fourthRound": 1/2
+                "fourthRound": 1
             },
             "regionName": "Midwest"
         }
@@ -180,10 +180,10 @@
     "FF": {
         "winners": {
             "finalFour": [
-                "Loyola-Chicago/Michigan",
-                "Villanova/Kansas/Duke"
+                "Michigan",
+                "Villanova"
             ],
-            "championship": "Loyola-Chicago/Michigan/Villanova/Kansas/Duke"
+            "championship": "Villanova"
         }
     }
 }
